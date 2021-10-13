@@ -1,0 +1,19 @@
+body {
+  margin: 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
