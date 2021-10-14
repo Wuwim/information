@@ -6,6 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background: #F4F6F5;
 }
 
 .flex-col {
