@@ -3,7 +3,7 @@
     <div class="block1">
       <div class="block1-1 flex-row">
         <div class="block1-1-img">
-          <img class="block1-1-img" src="../assets/img/tx.png" alt="" />
+          <img class="block1-1-img" src="../img/tx.png" alt="" />
         </div>
         <div class="block1-1-w flex-col">
           <div class="block1-1-w1">
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="block1-1-img1">
-          <img class="block1-1-img1-1" src="../assets/img/girl.png" alt="" />
+          <img class="block1-1-img1-1" src="../img/girl.png" alt="" />
         </div>
       </div>
       <div class="block1-2 flex-col">
@@ -24,12 +24,12 @@
     </div>
     <div class="block2 flex-row">
       <div class="block2-left flex-col">
-        <img class="finish-x" src="../assets/img/finish-x.png" alt="" />
-        <img class="finish-x" src="../assets/img/finish-x.png" alt="" />
-        <img class="finish-x" src="../assets/img/finish-x.png" alt="" />
-        <img class="finish-x" src="../assets/img/finish-x.png" alt="" />
-        <img class="finish-x" src="../assets/img/finish-x.png" alt="" />
-        <img class="finish-x" src="../assets/img/finish.png" alt="" />
+        <img class="finish-x" src="../img/finish-x.png" alt="" />
+        <img class="finish-x" src="../img/finish-x.png" alt="" />
+        <img class="finish-x" src="../img/finish-x.png" alt="" />
+        <img class="finish-x" src="../img/finish-x.png" alt="" />
+        <img class="finish-x" src="../img/finish-x.png" alt="" />
+        <img class="finish-x" src="../img/finish.png" alt="" />
       </div>
       <div class="block2-right flex-col">
         <div class="flex-row jbxx">
@@ -38,7 +38,9 @@
             <span class="block2-right-w2">Basic information</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn">填写</button>
+          <button class="block2-right-btn" @click="goBasicInformation()">
+            填写
+          </button>
         </div>
         <div class="flex-row jbxx">
           <div class="flex-col">
@@ -94,7 +96,13 @@ export default {
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    goBasicInformation() {
+      this.$router.push({
+        path: "002",
+      });
+    },
+  },
 };
 </script>
 
@@ -103,7 +111,7 @@ export default {
 .block1 {
   width: 100vw;
   height: 278px;
-  background: url(~@/assets/img/bj1.png);
+  background: url(~@/img/bj1.png);
   background-size: cover;
   background-repeat: no-repeat;
 }

@@ -2,7 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../assets/img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w">基础信息</span>
@@ -118,6 +118,45 @@
                 :columns="Politics"
                 @confirm="onPolitics"
                 @cancel="showPolitics = false"
+              />
+            </van-popup>
+            <!-- 入党时间 -->
+            <van-field
+              v-if="isshowdy"
+              readonly
+              clickable
+              name="入党时间"
+              :value="valueJoinTime"
+              label="入党时间"
+              placeholder="选择时间 >"
+              @click="showCalendar = true"
+              input-align="right"
+            />
+            <van-calendar
+              :min-date="minDate"
+              :max-date="maxDate"
+              v-model="showCalendar"
+              @confirm="onConfirm"
+            />
+            <!-- 介绍人 -->
+            <van-field
+              v-if="isshowdy"
+              readonly
+              clickable
+              name="介绍人"
+              :value="valueReligionP"
+              label="介绍人"
+              placeholder="选择宗教 >"
+              @click="showReligionp = true"
+              input-align="right"
+              :rules="[{ required: true, message: '请选择宗教' }]"
+            />
+            <van-popup v-model="showReligionp" position="bottom">
+              <van-picker
+                show-toolbar
+                :columns="Religion"
+                @confirm="onReligionp"
+                @cancel="showReligionp = false"
               />
             </van-popup>
             <!-- 籍贯 -->
@@ -265,10 +304,8 @@
               :rules="[{ required: true, message: '请上传图片' }]"
             >
               <template #input>
-                <van-uploader
-                  v-model="uploader"
-                  upload-icon="../assets/img/pushimg.png"
-                />
+                <van-uploader v-model="uploader" />
+                <!-- upload-icon="../assets/img/pushimg.png" -->
               </template>
             </van-field>
           </div>
@@ -289,6 +326,9 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
+      minDate: new Date(2010, 0, 1),
+      maxDate: new Date(2021, 12, 31),
+      isshowdy: false,
       pattern: /^\s*$/g,
       pattern1: /\d{6}/,
       formerlyName: "",
@@ -297,6 +337,8 @@ export default {
       valueNation: "", //民族值
       valueReligion: "", //宗教值
       valuePolitics: "", //政治面貌值
+      valueJoinTime: "", //入党时间值
+      valueReligionP: "", //介绍人宗教值
       valueNativeplace: "", //籍贯值
       valueResidence: "", //户口所在地值
       valueResidencexz: "", //户口性质值
@@ -313,6 +355,8 @@ export default {
       showNation: false, //民族框显示
       showReligion: false, //宗教框显示
       showPolitics: false, //政治面貌框显示
+      showCalendar: false, //入党时间框显示
+      showReligionp: false, //推荐人宗教显示
       showHealthy: false, //健康状况显示
       showArea: false, //出生地框显示
       showArea1: false, //籍贯框显示
@@ -321,7 +365,7 @@ export default {
       arr: [
         {
           name: "其他户口",
-          checked: true,
+          checked: false,
         },
         {
           name: "农村户口",
@@ -335,7 +379,7 @@ export default {
       blood: [
         {
           name: "A型",
-          checked: true,
+          checked: false,
         },
         {
           name: "B型",
@@ -387,6 +431,22 @@ export default {
       //政治面貌
       this.valuePolitics = value;
       this.showPolitics = false;
+      if (this.valuePolitics == "党员") {
+        this.isshowdy = true;
+      }
+    },
+    onConfirm(date) {
+      //入党时间
+      // console.log(date);
+      this.valueJoinTime = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
+      this.showCalendar = false;
+    },
+    onReligionp(value) {
+      //推荐人宗教
+      this.valueReligionP = value;
+      this.showReligionp = false;
     },
     onNativeplace(values) {
       //籍贯

@@ -1,43 +1,43 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import One from '../views/001.vue'
-import Two from '../views/002.vue'
-import Three from '../views/003.vue'
-import Four from '../views/004.vue'
-import Five from '../views/005.vue'
-import Six from '../views/006.vue'
-import Seven from '../views/007.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    component: One
+    name: "index",
+    component: () => import('@/views/index.vue')
   },
   {
     path: '/002',
-    component: Two
+    name: "BasicInformation",
+    component: () => import('@/views/BasicInformation.vue')
   },
   {
     path: '/003',
-    component: Three
+    name: "PersonalContactInformation",
+    component: () => import('@/views/PersonalContactInformation.vue')
   },
   {
     path: '/004',
-    component: Four
+    name: "CurriculumVitae",
+    component: () => import('@/views/CurriculumVitae.vue')
   },
   {
     path: '/005',
-    component: Five
+    name: "BasicFamilyInformation",
+    component: () => import('@/views/BasicFamilyInformation.vue')
   },
   {
     path: '/006',
-    component: Six
+    name: "SelectFamilyNum",
+    component: () => import('@/views/SelectFamilyNum.vue')
   },
   {
     path: '/007',
-    component: Seven
+    name: "FamilyMembers",
+    component: () => import('@/views/FamilyMembers.vue')
   },
 ]
 

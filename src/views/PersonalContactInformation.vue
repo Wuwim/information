@@ -2,7 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../assets/img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w">个人联系信息</span>
@@ -22,17 +22,19 @@
               :rules="[{ required: true, message: '请填写注册钉钉的手机号' }]"
             />
             <!-- 短号 -->
+            <div class="xuantian1">(选填)</div>
             <van-field
               v-model="shortPhone"
               name="短号"
               label="短号"
               placeholder="填写你的短号"
               input-align="right"
-              :rules="[{ required: true, message: '请填写短号' }]"
-            />
+            >
+            </van-field>
+
             <!-- Email -->
             <van-field
-              v-model="shortPhone"
+              v-model="email"
               name="Email"
               label="Email"
               placeholder="填写你的Email"
@@ -41,7 +43,7 @@
             />
             <!-- QQ号 -->
             <van-field
-              v-model="shortPhone"
+              v-model="qqNum"
               name="QQ号"
               label="QQ号"
               placeholder="填写你的QQ号"
@@ -50,7 +52,7 @@
             />
             <!-- 微信号 -->
             <van-field
-              v-model="shortPhone"
+              v-model="wxNum"
               name="微信号"
               label="微信号"
               placeholder="填写你的微信号"
@@ -61,7 +63,7 @@
             <van-field
               readonly
               clickable
-              name="出生地"
+              name="通讯地址"
               :value="postalAddress"
               label="通讯地址"
               placeholder="选择省市区 >"
@@ -69,28 +71,41 @@
               input-align="right"
               :rules="[{ required: true, message: '选择省市区' }]"
             />
-            <textarea
+            <!-- <textarea
+              name="通讯地址"
               type="text"
               class="postalAddress"
-              placeholder="详细地址至街道门牌、楼层房间等
+              placeholder="
+              详细地址至街道门牌、楼层房间等
               详细地址至街道门牌、楼层房间等"
-              placeholder-class="placeholder-class"
+              v-model="addressDetail"
+              @mouseleave="addressDetailed"
+            /> -->
+            <!-- <span v-show="isshowxxdz" class="isxxdz">请填写详细地址</span> -->
+            <van-field
+              v-model="addressDetail"
+              name="详细地址"
+              type="textarea"
+              placeholder="详细地址至街道门牌、楼层房间等
+详细地址至街道门牌、楼层房间等"
+              autosize
             />
             <van-popup v-model="showArea" position="bottom">
               <van-area
+                type="submit"
                 :area-list="areaList"
                 @confirm="onpostalAddress"
                 @cancel="showArea = false"
               />
             </van-popup>
-            <!-- 微信号 -->
+            <!-- 邮政编码 -->
+            <div class="xuantian2">(选填)</div>
             <van-field
-              v-model="shortPhone"
+              v-model="postalCode"
               name="邮政编码"
               label="邮政编码"
               placeholder="填写邮政编码"
               input-align="right"
-              :rules="[{ required: true, message: '请填写邮政编码' }]"
             />
           </div>
         </div>
@@ -106,10 +121,10 @@
 
 <script>
 import { areaList } from "@vant/area-data";
-import { Toast } from "vant";
 export default {
   data() {
     return {
+      isshowxxdz: false,
       pattern: /^\s*$/g,
       pattern1: /\d{6}/,
       phone: "", //手机号
@@ -118,6 +133,7 @@ export default {
       qqNum: "", //qq号
       wxNum: "", //微信号
       postalAddress: "", //通讯地址
+      addressDetail: "", //详细地址
       postalCode: "", //邮政编码
 
       showArea: false, //通讯地址显示
@@ -135,18 +151,26 @@ export default {
         .join("/");
       this.showArea = false;
     },
+    addressDetailed() {
+      console.log(this.addressDetail);
+      if (this.addressDetail == "") {
+        this.isshowxxdz = true;
+      } else {
+        this.isshowxxdz = false;
+      }
+    },
     onSubmit(values) {
       //   console.log(values[0]);
       //   console.log(values.健康状况);
-      for (var i in values) {
-        console.log(values[i]);
-        if (values[i] == "") {
-          //   console.log("曾用名为空");
-          Toast("表单未填写完整");
-          break;
-        }
-      }
-      //   console.log("submit", values);
+      // for (var i in values) {
+      //   console.log(values[i]);
+      //   if (values[i] == "") {
+      //     //   console.log("曾用名为空");
+      //     Toast("表单未填写完整");
+      //     break;
+      //   }
+      // }
+      console.log("submit", values);
     },
   },
 };
@@ -189,15 +213,41 @@ export default {
   width: 96%;
   margin-left: 2%;
 }
+.xuantian1 {
+  z-index: 999;
+  width: 60px;
+  height: 0;
+  position: relative;
+  top: 11px;
+  left: 50px;
+  font-size: 15px;
+  color: #4c99d8;
+}
+.xuantian2 {
+  z-index: 999;
+  width: 60px;
+  height: 0;
+  position: relative;
+  top: 11px;
+  left: 76px;
+  font-size: 15px;
+  color: #4c99d8;
+}
 .postalAddress {
+  font-size: 16px;
   width: 100%;
   border: none;
   height: 60px;
 }
-
-.placeholder-class {
+.isxxdz {
+  margin-left: 70px;
+  color: #ee0a24;
+  font-size: 12px;
+}
+textarea[class="postalAddress"]::-webkit-input-placeholder {
   font-size: 15px;
-  color: #c8c8c8;
+  text-align: left;
+  color: #b3b3b3;
 }
 
 .form4 {
