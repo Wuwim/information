@@ -28,7 +28,7 @@
         @change="onChange"
       />
       <div class="form4">
-        <van-button class="form4-btn">提交</van-button>
+        <van-button class="form4-btn" @click="gonext">提交</van-button>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
 export default {
   data() {
     return {
-      num: "",
+      num: 1,
       columns: [
         "1人",
         "2人",
@@ -60,6 +60,14 @@ export default {
       this.num = index + 1;
       console.log(this.num);
       // Toast(`当前值：${value}, 当前索引：${index}`);
+    },
+    gonext() {
+      this.$router.push({
+        path: "007",
+        query: {
+          num: this.num,
+        },
+      });
     },
   },
 };

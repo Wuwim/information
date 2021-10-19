@@ -437,7 +437,7 @@ export default {
     },
     onConfirm(date) {
       //入党时间
-      // console.log(date);
+      console.log(date);
       this.valueJoinTime = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
