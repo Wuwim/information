@@ -412,13 +412,8 @@ export default {
     },
     checkForm() {
       console.log();
-      if (this.homePhone == "") {
-        this.errorText = "手机号不能为空";
-        this.isShowError = true;
-        this.isErrorjtdh = true;
-        return;
-      } else if (!/^1(3|4|5|7|8)\d{9}$/.test(this.homePhone)) {
-        this.errorText = "手机号码有误，请重新输入";
+      if (this.allMessage[this.several - 1].relativeName == "") {
+        this.errorText = "亲属名字不能为空";
         this.isShowError = true;
         this.isErrorjtdh = true;
         return;
@@ -428,8 +423,8 @@ export default {
         this.isErrorjtdh = false;
       }
 
-      if (this.homeAddress == "") {
-        this.errorText = "家庭地址不能为空";
+      if (this.allMessage[this.several - 1].gender == "") {
+        this.errorText = "性别不能为空";
         this.isShowError = true;
         this.isErrorjtdz = true;
         return;
