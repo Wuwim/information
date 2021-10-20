@@ -69,7 +69,7 @@ export default {
         {
           FileStudentsFromPoorFamilies: "",
           isOk: false,
-          isNo: false,
+          isNo: false,   
         },
       ],
     };
