@@ -20,7 +20,7 @@
             class="scorll_title"
             :class="item.isOk ? 'scorll_title_w' : 'scorll_title_w1'"
           >
-            {{ item.ok ? "√" : item.title }}
+            {{ item.isOk ? "√" : item.title }}
           </div>
           <div class="scorll_body">{{ item.peopleName }}</div>
         </div>
@@ -33,255 +33,258 @@
     </div>
     <div class="form-box">
       <!-- @submit="checkForm" -->
-      <form action="">
-        <div class="form1-box">
-          <div class="form1_title">{{ "成员" + several }}</div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 亲属名字 -->
-            <div class="item_box flex-row">
-              <div class="item_title">亲属名字</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写名字"
-                  v-model="allMessage[several - 1].relativeName"
-                />
-              </div>
+      <!-- <form action=""> -->
+      <div class="form1-box">
+        <div class="form1_title">{{ "成员" + several }}</div>
+        <div :class="isErrorRelativeName ? 'form1' : ''">
+          <!-- 亲属名字 -->
+          <div class="item_box flex-row">
+            <div class="item_title">亲属名字</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorRelativeName ? 'error_color' : ''"
+                type="text"
+                placeholder="填写名字"
+                v-model="allMessage[several - 1].relativeName"
+              />
             </div>
-            <div class="fgx"></div>
           </div>
+          <div class="fgx"></div>
+        </div>
 
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 性别 -->
-            <div class="item_box flex-row">
-              <div class="item_title">性别</div>
-              <div class="item_content">
-                <input
-                  style="display: none"
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写性别"
-                  v-model="allMessage[several - 1].gender"
-                />
-                <div class="flex-row">
-                  <div
-                    @click="choseSex(item, index)"
-                    class="sex"
-                    :class="item.checked ? 'checkSex' : ''"
-                    v-for="(item, index) in gender"
-                    :key="index + '1'"
-                  >
-                    {{ item.gender }}
-                  </div>
+        <div :class="isErrorPeopleSex ? 'form1' : ''">
+          <!-- 性别 -->
+          <div class="item_box flex-row">
+            <div class="item_title">性别</div>
+            <div class="item_content">
+              <input
+                style="display: none"
+                class="item_input"
+                :class="isErrorPeopleSex ? 'error_color' : ''"
+                type="text"
+                placeholder="填写性别"
+                v-model="allMessage[several - 1].gender"
+              />
+              <div class="flex-row">
+                <div
+                  @click="choseSex(item, index)"
+                  class="sex"
+                  :class="item.checked ? 'checkSex' : ''"
+                  v-for="(item, index) in gender[several - 1]"
+                  :key="index + '1'"
+                >
+                  {{ item.gender }}
                 </div>
               </div>
             </div>
-            <div class="fgx"></div>
           </div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 出生日期 -->
-            <div class="item_box flex-row">
-              <div class="item_title">出生日期</div>
-              <div class="item_content">
-                <input
-                  readonly="readonly"
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="选择年月日 >"
-                  v-model="allMessage[several - 1].birthday"
-                  @click="showCalendar = true"
-                />
-              </div>
-            </div>
-            <!-- 日期弹框 -->
-            <van-popup
-              v-model="showCalendar"
-              position="bottom"
-              :style="{ height: '50%' }"
-            >
-              <van-datetime-picker
-                type="date"
-                title="选择年月日"
-                :min-date="minDate"
-                :max-date="maxDate"
-                @confirm="showtime"
+          <div class="fgx"></div>
+        </div>
+        <div :class="isErrorBirthday ? 'form1' : ''">
+          <!-- 出生日期 -->
+          <div class="item_box flex-row">
+            <div class="item_title">出生日期</div>
+            <div class="item_content">
+              <input
+                readonly="readonly"
+                class="item_input"
+                :class="isErrorBirthday ? 'error_color' : ''"
+                type="text"
+                placeholder="选择年月日 >"
+                v-model="allMessage[several - 1].birthday"
+                @click="showCalendar = true"
               />
-            </van-popup>
-            <div class="fgx"></div>
-          </div>
-
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 年龄 -->
-            <div class="item_box flex-row">
-              <div class="item_title">年龄</div>
-              <div class="item_content">
-                <input
-                  readonly="readonly"
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="通过出生日期获取"
-                  v-model="allMessage[several - 1].age"
-                />
-              </div>
             </div>
-            <div class="fgx"></div>
           </div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 与本人关系 -->
-            <div class="item_box flex-row">
-              <div class="item_title">与本人关系</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="如：父女、姐妹等"
-                  v-model="allMessage[several - 1].relationship"
-                />
-              </div>
-            </div>
-            <div class="fgx"></div>
-          </div>
-
-          <div :class="isErrorjtdz ? 'form1' : ''">
-            <!-- 现在何地 -->
-            <div class="item_box flex-row">
-              <div class="item_title">现在何地</div>
-              <div class="item_content">
-                <input
-                  readonly="readonly"
-                  class="item_input"
-                  :class="isErrorjtdz ? 'error_color' : ''"
-                  type="text"
-                  placeholder="选择省市区 >"
-                  v-model="allMessage[several - 1].homeAddress"
-                  @click="showArea = true"
-                />
-              </div>
-              <van-popup v-model="showArea" position="bottom">
-                <van-area
-                  type="submit"
-                  :area-list="areaList"
-                  @confirm="onpostalAddress"
-                  @cancel="showArea = false"
-                />
-              </van-popup>
-            </div>
-            <textarea
-              name="通讯地址"
-              type="text"
-              :class="isErrorjtdz ? 'error_color' : ''"
-              class="homeAddress"
-              placeholder="详细地址至街道门牌、楼层房间等
-详细地址至街道门牌、楼层房间等"
-              v-model="allMessage[several - 1].addressDetail"
+          <!-- 日期弹框 -->
+          <van-popup
+            v-model="showCalendar"
+            position="bottom"
+            :style="{ height: '50%' }"
+          >
+            <van-datetime-picker
+              type="date"
+              title="选择年月日"
+              :min-date="minDate"
+              :max-date="maxDate"
+              @confirm="showtime"
             />
-            <div class="fgx"></div>
-          </div>
+          </van-popup>
+          <div class="fgx"></div>
+        </div>
 
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 工作(学习)单位 -->
-            <div class="item_box1 flex-col">
-              <div class="item_title">工作(学习)单位</div>
-              <div class="item_content">
-                <input
-                  class="item_input1"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写亲属工作单位"
-                  v-model="allMessage[several - 1].workUnit"
-                />
-              </div>
+        <div :class="isErrorBirthday ? 'form1' : ''">
+          <!-- 年龄 -->
+          <div class="item_box flex-row">
+            <div class="item_title">年龄</div>
+            <div class="item_content">
+              <input
+                readonly="readonly"
+                class="item_input"
+                :class="isErrorBirthday ? 'error_color' : ''"
+                type="text"
+                placeholder="通过出生日期获取"
+                v-model="allMessage[several - 1].age"
+              />
             </div>
-            <div class="fgx"></div>
           </div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 职业 -->
-            <div class="item_box flex-row">
-              <div class="item_title">职业</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写亲属职业"
-                  v-model="allMessage[several - 1].occupation"
-                />
-              </div>
+          <div class="fgx"></div>
+        </div>
+        <div :class="isErrorRelationship ? 'form1' : ''">
+          <!-- 与本人关系 -->
+          <div class="item_box flex-row">
+            <div class="item_title">与本人关系</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorRelationship ? 'error_color' : ''"
+                type="text"
+                placeholder="如：父女、姐妹等"
+                v-model="allMessage[several - 1].relationship"
+              />
             </div>
-            <div class="fgx"></div>
           </div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 年收入 -->
-            <div class="item_box flex-row">
-              <div class="item_title">年收入</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写亲属年收入"
-                  v-model="allMessage[several - 1].annualIncome"
-                />
-              </div>
+          <div class="fgx"></div>
+        </div>
+
+        <div :class="isErrorHomeAddress ? 'form1' : ''">
+          <!-- 现在何地 -->
+          <div class="item_box flex-row">
+            <div class="item_title">现在何地</div>
+            <div class="item_content">
+              <input
+                readonly="readonly"
+                class="item_input"
+                :class="isErrorHomeAddress ? 'error_color' : ''"
+                type="text"
+                placeholder="选择省市区 >"
+                v-model="allMessage[several - 1].homeAddress"
+                @click="showArea = true"
+              />
             </div>
-            <div class="fgx"></div>
-          </div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 健康状况 -->
-            <div class="item_box flex-row">
-              <div class="item_title">健康状况</div>
-              <div class="item_content">
-                <input
-                  readonly="readonly"
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="选择健康状况 >"
-                  v-model="allMessage[several - 1].health"
-                  @click="showHealthy = true"
-                />
-              </div>
-            </div>
-            <van-popup v-model="showHealthy" position="bottom">
-              <van-picker
-                show-toolbar
-                :columns="Healthy"
-                @confirm="onHealthy"
-                @cancel="showHealthy = false"
+            <van-popup v-model="showArea" position="bottom">
+              <van-area
+                type="submit"
+                :area-list="areaList"
+                @confirm="onpostalAddress"
+                @cancel="showArea = false"
               />
             </van-popup>
-            <div class="fgx"></div>
           </div>
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 联系电话 -->
-            <div class="item_box flex-row">
-              <div class="item_title">联系电话</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写亲属电话"
-                  v-model="allMessage[several - 1].contactNumber"
-                />
-              </div>
-            </div>
-            <div class="fgx"></div>
-          </div>
+          <textarea
+            name="通讯地址"
+            type="text"
+            :class="isErrorHomeAddress ? 'error_color' : ''"
+            class="homeAddress"
+            placeholder="详细地址至街道门牌、楼层房间等
+详细地址至街道门牌、楼层房间等"
+            v-model="allMessage[several - 1].addressDetail"
+          />
+          <div class="fgx"></div>
         </div>
 
-        <!-- 提交按钮 -->
-        <div class="btn_box">
-          <!-- type="submit" -->
-          <button class="btn" @click="checkForm">保存并填写下一个</button>
+        <div :class="isErrorWorkUnit ? 'form1' : ''">
+          <!-- 工作(学习)单位 -->
+          <div class="item_box1 flex-col">
+            <div class="item_title">工作(学习)单位</div>
+            <div class="item_content">
+              <input
+                class="item_input1"
+                :class="isErrorWorkUnit ? 'error_color' : ''"
+                type="text"
+                placeholder="填写亲属工作单位"
+                v-model="allMessage[several - 1].workUnit"
+              />
+            </div>
+          </div>
+          <div class="fgx"></div>
         </div>
-      </form>
+        <div :class="isErrorOccupation ? 'form1' : ''">
+          <!-- 职业 -->
+          <div class="item_box flex-row">
+            <div class="item_title">职业</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorOccupation ? 'error_color' : ''"
+                type="text"
+                placeholder="填写亲属职业"
+                v-model="allMessage[several - 1].occupation"
+              />
+            </div>
+          </div>
+          <div class="fgx"></div>
+        </div>
+        <div :class="isErrorAnnualIncome ? 'form1' : ''">
+          <!-- 年收入 -->
+          <div class="item_box flex-row">
+            <div class="item_title">年收入</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorAnnualIncome ? 'error_color' : ''"
+                type="text"
+                placeholder="填写亲属年收入"
+                v-model="allMessage[several - 1].annualIncome"
+              />
+            </div>
+          </div>
+          <div class="fgx"></div>
+        </div>
+        <div :class="isErrorHealth ? 'form1' : ''">
+          <!-- 健康状况 -->
+          <div class="item_box flex-row">
+            <div class="item_title">健康状况</div>
+            <div class="item_content">
+              <input
+                readonly="readonly"
+                class="item_input"
+                :class="isErrorHealth ? 'error_color' : ''"
+                type="text"
+                placeholder="选择健康状况 >"
+                v-model="allMessage[several - 1].health"
+                @click="showHealthy = true"
+              />
+            </div>
+          </div>
+          <van-popup v-model="showHealthy" position="bottom">
+            <van-picker
+              show-toolbar
+              :columns="Healthy"
+              @confirm="onHealthy"
+              @cancel="showHealthy = false"
+            />
+          </van-popup>
+          <div class="fgx"></div>
+        </div>
+        <div :class="isErrorContactNumber ? 'form1' : ''">
+          <!-- 联系电话 -->
+          <div class="item_box flex-row">
+            <div class="item_title">联系电话</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorContactNumber ? 'error_color' : ''"
+                type="text"
+                placeholder="填写亲属电话"
+                v-model="allMessage[several - 1].contactNumber"
+              />
+            </div>
+          </div>
+          <div class="fgx"></div>
+        </div>
+      </div>
+
+      <!-- 提交按钮 -->
+      <div class="btn_box">
+        <!-- type="submit" -->
+        <button class="btn" @click="checkForm" v-show="!isFinally">
+          保存并填写下一个
+        </button>
+        <button class="btn" v-show="isFinally">提交</button>
+      </div>
+      <!-- </form> -->
     </div>
   </div>
 </template>
@@ -296,29 +299,27 @@ export default {
       maxDate: new Date(2010, 10, 1),
       number: 0,
       several: 1,
-      aa: {
-        title: 1,
-        peopleName: "成员",
-        isOk: false,
-        isChecked: false,
-      },
-      familyNum: [],
-      allMessage: [],
+      isFinally: false,
+      familyNum: [], //头部列表
+      allMessage: [], //所有信息
       isShowError: false,
-      isErrorjtdh: false,
-      isErrorjtdz: false,
-      isErrorjhr: false,
-      isErrorjhr1: false,
+      isErrorRelativeName: false,
+      isErrorPeopleSex: false,
+      isErrorBirthday: false,
+      isErrorRelationship: false,
+      isErrorHomeAddress: false,
+      isErrorWorkUnit: false,
+      isErrorOccupation: false,
+      isErrorAnnualIncome: false,
+      isErrorHealth: false,
+      isErrorContactNumber: false,
       errorText: "",
 
       showCalendar: false, //显示时间框
       showArea: false, //显示地区框
       showHealthy: false, //显示健康框
       areaList,
-      gender: [
-        { gender: "男", checked: false },
-        { gender: "女", checked: false },
-      ],
+      gender: [],
       Healthy: ["健康", "亚健康", "危险"], //健康状况选择器值
     };
   },
@@ -345,24 +346,32 @@ export default {
       }
 
       this.familyNum[0].isChecked = true;
-
+      // 添加表单
       for (var j = 0; j < this.number; j++) {
         this.allMessage.push({
-          relativeName: "",
-          peopleSex: "",
-          birthday: "",
-          age: "",
-          relationship: "",
-          homeAddress: "",
-          addressDetail: "",
-          workUnit: "",
-          occupation: "",
-          annualIncome: "",
-          health: "",
-          contactNumber: "",
+          relativeName: "", //亲属名字
+          peopleSex: "", //性别
+          birthday: "", //出生日期
+          age: "", //年龄
+          relationship: "", //与本人关系
+          homeAddress: "", //现在何地
+          addressDetail: "", //具体地址
+          workUnit: "", //工作学习单位
+          occupation: "", //职业
+          annualIncome: "", //年收入
+          health: "", //健康状况
+          contactNumber: "", //联系电话
         });
       }
-      console.log(this.allMessage);
+      // console.log(this.allMessage);
+      // 添加性别框
+      for (var k = 0; k < this.number; k++) {
+        this.gender.push([
+          { gender: "男", checked: false },
+          { gender: "女", checked: false },
+        ]);
+      }
+      console.log(this.gender);
     },
     checked(index) {
       //选中成员
@@ -377,91 +386,166 @@ export default {
     },
     choseSex(item, index) {
       //选中性别
-      for (var i in this.gender) {
+      for (var i in this.gender[this.several - 1]) {
         if (i == index) {
-          this.gender[i].checked = true;
-          this.peopleSex = item.gender;
-          console.log(this.peopleSex);
+          this.gender[this.several - 1][i].checked = true;
+          // console.log(this.gender[this.several - 1][i].checked);
+          this.allMessage[this.several - 1].peopleSex = item.gender;
+          // console.log(this.allMessage[this.several - 1].peopleSex);
         } else {
-          this.gender[i].checked = false;
+          this.gender[this.several - 1][i].checked = false;
         }
       }
     },
     showtime(date) {
       //出生日期
       // console.log(date);
-      this.birthday = `${date.getFullYear()}-${
+      this.allMessage[this.several - 1].birthday = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
-      this.age = 2021 - date.getFullYear();
+      this.allMessage[this.several - 1].age = 2021 - date.getFullYear();
       this.showCalendar = false;
     },
 
     onpostalAddress(values) {
       //出生地
-      this.homeAddress = values
+      this.allMessage[this.several - 1].homeAddress = values
         .filter((item) => !!item)
         .map((item) => item.name)
         .join("/");
       this.showArea = false;
     },
     onHealthy(value) {
-      //宗教
-      this.health = value;
+      //健康状况
+      this.allMessage[this.several - 1].health = value;
       this.showHealthy = false;
     },
     checkForm() {
       console.log();
-      if (this.allMessage[this.several - 1].relativeName == "") {
-        this.errorText = "亲属名字不能为空";
-        this.isShowError = true;
-        this.isErrorjtdh = true;
-        return;
-      } else {
-        this.errorText = "";
-        this.isShowError = false;
-        this.isErrorjtdh = false;
-      }
+      // if (this.allMessage[this.several - 1].relativeName == "") {
+      //   this.errorText = "亲属名字不能为空";
+      //   this.isShowError = true;
+      //   this.isErrorRelativeName = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorRelativeName = false;
+      // }
 
-      if (this.allMessage[this.several - 1].gender == "") {
-        this.errorText = "性别不能为空";
-        this.isShowError = true;
-        this.isErrorjtdz = true;
-        return;
-      } else if (this.addressDetail.length < 10) {
-        this.errorText = "地址写的详细一点！";
-        this.isShowError = true;
-        this.isErrorjtdz = true;
-        return;
+      // if (this.allMessage[this.several - 1].peopleSex == "") {
+      //   this.errorText = "请选择性别";
+      //   this.isShowError = true;
+      //   this.isErrorPeopleSex = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorPeopleSex = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].birthday == "") {
+      //   this.errorText = "请填写出生日期";
+      //   this.isShowError = true;
+      //   this.isErrorBirthday = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorBirthday = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].relationship == "") {
+      //   this.errorText = "与本人关系不能为空";
+      //   this.isShowError = true;
+      //   this.isErrorRelationship = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorRelationship = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].homeAddress == "") {
+      //   this.errorText = "请选择地点";
+      //   this.isShowError = true;
+      //   this.isErrorHomeAddress = true;
+      //   return;
+      // } else if (this.allMessage[this.several - 1].addressDetail.length < 10) {
+      //   this.errorText = "地址可以写的更详细点";
+      //   this.isShowError = true;
+      //   this.isErrorHomeAddress = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorHomeAddress = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].workUnit == "") {
+      //   this.errorText = "工作(学习)单位不能为空";
+      //   this.isShowError = true;
+      //   this.isErrorWorkUnit = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorWorkUnit = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].occupation == "") {
+      //   this.errorText = "职业不能为空";
+      //   this.isShowError = true;
+      //   this.isErrorOccupation = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorOccupation = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].annualIncome == "") {
+      //   this.errorText = "请填写年收入";
+      //   this.isShowError = true;
+      //   this.isErrorAnnualIncome = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorAnnualIncome = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].health == "") {
+      //   this.errorText = "请选择健康状况";
+      //   this.isShowError = true;
+      //   this.isErrorHealth = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorHealth = false;
+      // }
+
+      // if (this.allMessage[this.several - 1].contactNumber == "") {
+      //   this.errorText = "联系电话不能为空";
+      //   this.isShowError = true;
+      //   this.isErrorContactNumber = true;
+      //   return;
+      // } else {
+      //   this.errorText = "";
+      //   this.isShowError = false;
+      //   this.isErrorContactNumber = false;
+      // }
+
+      this.familyNum[this.several - 1].peopleName =
+        this.allMessage[this.several - 1].relativeName;
+
+      this.familyNum[this.several - 1].isOk = true;
+      console.log(this.several);
+      if (this.several < this.number) {
+        this.checked(this.several);
       } else {
-        this.errorText = "";
-        this.isShowError = false;
-        this.isErrorjtdz = false;
-      }
-      if (this.emergencyContact == "") {
-        this.errorText = "紧急联系人(监护人)不能为空";
-        this.isShowError = true;
-        this.isErrorjhr = true;
-        return;
-      } else {
-        this.errorText = "";
-        this.isShowError = false;
-        this.isErrorjhr = false;
-      }
-      if (this.EmergencyContactNumber == "") {
-        this.errorText = "紧急联系人电话不能为空";
-        this.isShowError = true;
-        this.isErrorjhr1 = true;
-        return;
-      } else if (!/^1(3|4|5|7|8)\d{9}$/.test(this.homePhone)) {
-        this.errorText = "手机号码有误，请重新输入";
-        this.isShowError = true;
-        this.isErrorjhr1 = true;
-        return;
-      } else {
-        this.errorText = "";
-        this.isShowError = false;
-        this.isErrorjhr1 = false;
+        this.isFinally = true;
       }
 
       //   console.log(values.健康状况);
@@ -508,6 +592,7 @@ export default {
 .scorll_box {
   width: auto;
   overflow: scroll;
+  // align-items: flex-start;
 }
 ::-webkit-scrollbar {
   display: none; /* Chrome Safari */

@@ -7,13 +7,13 @@
           <img class="goback" src="../img/goback1.png" alt="" />
         </div>
         <div class="title-w-box">
-          <span class="title-w">家庭成员</span>
+          <span class="title-w">贫困生</span>
         </div>
       </div>
       <div class="block1-body">
         <div class="block1-w flex-col">
           <span class="block1-w1">请确定</span>
-          <span class="block1-w2">你的户口本上的总人数</span>
+          <span class="block1-w2">是否为贫困生</span>
           <div class="block1-w3"></div>
           <span class="block1-w4">*请核对后再选择*</span>
         </div>
@@ -28,7 +28,7 @@
         @change="onChange"
       />
       <div class="form4">
-        <van-button class="form4-btn" @click="gonext">提交</van-button>
+        <van-button class="form4-btn" @click="gonext">确定</van-button>
       </div>
     </div>
   </div>
@@ -40,18 +40,7 @@ export default {
   data() {
     return {
       num: 1,
-      columns: [
-        "1人",
-        "2人",
-        "3人",
-        "4人",
-        "5人",
-        "6人",
-        "7人",
-        "8人",
-        "9人",
-        "10人",
-      ],
+      columns: ["否", "是"],
     };
   },
   mounted() {},
@@ -63,10 +52,7 @@ export default {
     },
     gonext() {
       this.$router.push({
-        path: "007",
-        query: {
-          num: this.num,
-        },
+        path: "009",
       });
     },
   },
@@ -151,6 +137,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 8px;
 }
 .form4-btn {
   width: 255px;

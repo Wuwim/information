@@ -39,6 +39,16 @@ const routes = [
     name: "FamilyMembers",
     component: () => import('@/views/FamilyMembers.vue')
   },
+  {
+    path: '/008',
+    name: "SelectNeedyStudents",
+    component: () => import('@/views/SelectNeedyStudents.vue')
+  },
+  {
+    path: '/009',
+    name: "NeedyStudents",
+    component: () => import('@/views/NeedyStudents.vue')
+  },
 ]
 
 const router = new VueRouter({
