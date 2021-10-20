@@ -32,10 +32,8 @@
                 v-model="arr[0].FileStudentsFromPoorFamilies"
               />
               <div class="flex-row">
-                <div class="sex" :class="arr[0].isNo ? 'checkSex' : ''">否</div>
-                <div class="sex" :class="arr[0].isYes ? 'checkSex' : ''">
-                  是
-                </div>
+                <div class="sex" :class="arr[0].isNo ? '' : 'checkSex'">否</div>
+                <div class="sex" :class="arr[0].isNo ? 'checkSex' : ''">是</div>
               </div>
             </div>
           </div>
@@ -62,19 +60,16 @@ export default {
           FileStudentsFromPoorFamilies: "",
           isOk: false,
           isNo: false,
-          isYes: false,
         },
         {
           FileStudentsFromPoorFamilies: "",
           isOk: false,
           isNo: false,
-          isYes: false,
         },
         {
           FileStudentsFromPoorFamilies: "",
           isOk: false,
           isNo: false,
-          isYes: false,
         },
       ],
     };
