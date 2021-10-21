@@ -9,41 +9,63 @@
       </div>
     </div>
 
-    <!-- <div class="error flex-row" v-show="isShowError">
-      <img class="error_voice" src="../img/voice.png" alt="" />
-      <span class="error_w">{{ errorText }}</span>
-    </div> -->
+    <div class="error flex-row">
+      <img class="error_voice" src="../img/voice1.png" alt="" />
+      <span class="error_w">其中一项或一项以上必须选是，才能提交！</span>
+    </div>
     <div class="form-box">
       <!-- @submit="checkForm" -->
       <!-- <form action=""> -->
       <div class="form1-box">
         <!-- :class=" ? 'form1' : ''" -->
-        <div>
+        <div v-for="(item, index) in arr" :key="index">
           <!-- 性别 -->
           <div class="item_box flex-row">
-            <div class="item_title">是否建档立卡贫困家庭学生</div>
+            <div class="item_title">{{ item.title }}</div>
             <div class="item_content">
+              <!-- @click="item.isNo=flase" -->
               <input
                 style="display: none"
                 class="item_input"
-                :class="arr[0].isOk ? 'error_color' : ''"
                 type="text"
                 placeholder="填写性别"
-                v-model="arr[0].FileStudentsFromPoorFamilies"
+                v-model="item.FileStudentsFromPoorFamilies"
               />
               <div class="flex-row">
-                <div class="sex" :class="arr[0].isNo ? '' : 'checkSex'">否</div>
-                <div class="sex" :class="arr[0].isNo ? 'checkSex' : ''">是</div>
+                <div
+                  class="sex"
+                  :class="!item.isNo ? 'checkSex' : ''"
+                  @click="item.isNo = false"
+                >
+                  否
+                </div>
+                <div
+                  class="sex"
+                  :class="item.isNo ? 'checkSex' : ''"
+                  @click="item.isNo = true"
+                >
+                  是
+                </div>
               </div>
             </div>
           </div>
+          <div class="flex-col upload" v-show="item.isNo">
+            <span class="upload_w">*证明材料（照片）</span>
+            <van-uploader v-model="fileList[index]" :after-read="afterRead">
+              <div class="upload_chose flex-row">
+                <div class="upload_chose_icon">+</div>
+                <div class="upload_chose_w">上传</div>
+              </div>
+            </van-uploader>
+          </div>
+
           <div class="fgx"></div>
         </div>
       </div>
       <!-- 提交按钮 -->
       <div class="btn_box">
         <!-- type="submit" -->
-        <button class="btn">提交</button>
+        <button class="btn" @click="checkForm">提交</button>
       </div>
       <!-- </form> -->
     </div>
@@ -51,25 +73,53 @@
 </template>
 
 <script>
-// import { Toast } from "vant";
+import { Toast } from "vant";
 export default {
   data() {
     return {
+      fileList: [[], [], [], [], [], [], []],
       arr: [
         {
+          title: "是否建档立卡贫困家庭学生",
           FileStudentsFromPoorFamilies: "",
           isOk: false,
           isNo: false,
         },
         {
+          title: "是否最低生活保障家庭学生",
           FileStudentsFromPoorFamilies: "",
           isOk: false,
           isNo: false,
         },
         {
+          title: "是否特困供养学生",
           FileStudentsFromPoorFamilies: "",
           isOk: false,
-          isNo: false,   
+          isNo: false,
+        },
+        {
+          title: "是否孤残学生",
+          FileStudentsFromPoorFamilies: "",
+          isOk: false,
+          isNo: false,
+        },
+        {
+          title: "是否烈士子女",
+          FileStudentsFromPoorFamilies: "",
+          isOk: false,
+          isNo: false,
+        },
+        {
+          title: "是否家庭经济困难残疾学生及残疾人子女",
+          FileStudentsFromPoorFamilies: "",
+          isOk: false,
+          isNo: false,
+        },
+        {
+          title: "是否低保边缘户",
+          FileStudentsFromPoorFamilies: "",
+          isOk: false,
+          isNo: false,
         },
       ],
     };
@@ -77,37 +127,29 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    con() {},
-    choseSex(item, index) {
-      //选中性别
-      console.log(this.gender[0]);
-      console.log("item:" + item);
-      console.log("index:" + index);
-      // for (var i in this.gender[this.several - 1]) {
-      //   if (i == index) {
-      //     this.gender[this.several - 1][i].checked = true;
-      //     // console.log(this.gender[this.several - 1][i].checked);
-      //     this.allMessage[this.several - 1].peopleSex = item.gender;
-      //     // console.log(this.allMessage[this.several - 1].peopleSex);
-      //   } else {
-      //     this.gender[this.several - 1][i].checked = false;
-      //   }
-      // }
+    afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      // console.log(file.content);
+      console.log(file);
     },
 
     checkForm() {
-      console.log();
-
-      //   console.log(values.健康状况);
-      // for (var i in values) {
-      //   console.log(values[i]);
-      //   if (values[i] == "") {
-      //     //   console.log("曾用名为空");
-      //     Toast("表单未填写完整");
-      //     break;
-      //   }
-      // }
-      //   console.log("submit", values);
+      for (var i = 0; i < this.arr.length; i++) {
+        if (this.arr[i].isNo == false) {
+          if (i == this.arr.length - 1) {
+            Toast("请选择贫困原因");
+          }
+        }
+      }
+      for (var k = 0; k < this.arr.length; k++) {
+        if (this.arr[k].isNo == true) {
+          if (this.fileList[k] == "") {
+            Toast("请上传" + this.arr[k].title + "的证明");
+            return;
+          }
+        }
+      }
+      console.log("提交了~~~提交了！！！");
     },
   },
 };
@@ -183,7 +225,7 @@ export default {
 .error {
   width: 375px;
   height: 30px;
-  background: #fceded;
+  background: #dcf2f0;
   opacity: 1;
   align-items: center;
 }
@@ -195,13 +237,13 @@ export default {
 .error_w {
   margin-left: 8px;
   font-size: 12px;
-  color: #e63535;
+  color: #50c9c3;
 }
 .error_color {
   background: #fceded;
 }
 .form1-box {
-  margin: auto;
+  margin: 15px auto 0;
   width: 345px;
   background: #ffffff;
   opacity: 1;
@@ -225,7 +267,7 @@ export default {
   opacity: 1;
 }
 .item_box {
-  padding: 18px 18px;
+  padding: 14px 18px;
   align-items: center;
   justify-content: space-between;
 }
@@ -233,6 +275,7 @@ export default {
   padding: 18px 18px;
 }
 .item_title {
+  width: 60%;
   font-size: 15px;
   color: #4a4a4a;
 }
@@ -278,6 +321,55 @@ input::-webkit-input-placeholder {
   width: 310px;
   height: 0px;
   border-top: 1px solid #ececec;
+}
+.upload {
+  margin-left: 18px;
+  margin-bottom: 20px;
+}
+.upload_w {
+  font-size: 15px;
+  color: #c8c8c8;
+  margin-bottom: 12px;
+}
+.upload_chose {
+  width: 105px;
+  height: 105px;
+  background: #f1faff;
+  border: 1px dashed #4c96d9;
+  opacity: 1;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.upload_chose_icon {
+  width: 16px;
+  height: 16px;
+  background: #4c96d9;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 15px;
+}
+.upload_chose_w {
+  font-size: 12px;
+  color: #4c96d9;
+}
+::v-deep .van-uploader__preview-image {
+  width: 105px;
+  height: 105px;
+}
+::v-deep .van-uploader__preview-delete {
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #c8c8c8;
+}
+::v-deep .van-uploader__preview-delete-icon {
+  top: -4px;
+  right: -4px;
+  font-size: 25px;
 }
 .homeAddress {
   margin-left: 18px;

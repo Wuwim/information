@@ -19,7 +19,13 @@
               label="注册钉钉的手机号"
               placeholder="填写注册钉钉的手机号"
               input-align="right"
-              :rules="[{ required: true, message: '请填写注册钉钉的手机号' }]"
+              :rules="[
+                { required: true, message: '请填写注册钉钉的手机号' },
+                {
+                  pattern ,
+                  message: '请填写正确的手机号',
+                },
+              ]"
             />
             <!-- 短号 -->
             <div class="xuantian1">(选填)</div>
@@ -39,7 +45,10 @@
               label="Email"
               placeholder="填写你的Email"
               input-align="right"
-              :rules="[{ required: true, message: '请填写Email' }]"
+              :rules="[
+                { required: true, message: '请填写Email' },
+                { validator, message: '请正确Email' },
+              ]"
             />
             <!-- QQ号 -->
             <van-field
@@ -125,8 +134,7 @@ export default {
   data() {
     return {
       isshowxxdz: false,
-      pattern: /^\s*$/g,
-      pattern1: /\d{6}/,
+      pattern: /^1[3-9]\d{9}$/,
       phone: "", //手机号
       shortPhone: "", //手机短号
       email: "", //邮箱
@@ -143,6 +151,10 @@ export default {
   },
   mounted() {},
   methods: {
+    validator(val) {
+      console.log(val);
+      return /1\d{10}/.test(val);
+    },
     onpostalAddress(values) {
       //出生地
       this.postalAddress = values

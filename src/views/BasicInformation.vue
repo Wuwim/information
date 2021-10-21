@@ -286,11 +286,11 @@
             <!-- 农行卡号 -->
             <van-field
               v-model="bankNum"
-              name="农行卡号"
+              name="农行账户"
               label="农行账户"
               placeholder="填写银行卡号"
               input-align="right"
-              :rules="[{ pattern1, message: '请输入内容' }]"
+              :rules="[{ pattern, message: '请填写银行卡号' }]"
             />
           </div>
         </div>
@@ -304,8 +304,12 @@
               :rules="[{ required: true, message: '请上传图片' }]"
             >
               <template #input>
-                <van-uploader v-model="uploader" />
-                <!-- upload-icon="../assets/img/pushimg.png" -->
+                <van-uploader v-model="uploader">
+                  <div class="upload_chose flex-row">
+                    <div class="upload_chose_icon">+</div>
+                    <div class="upload_chose_w">上传</div>
+                  </div>
+                </van-uploader>
               </template>
             </van-field>
           </div>
@@ -329,8 +333,7 @@ export default {
       minDate: new Date(2010, 0, 1),
       maxDate: new Date(2021, 12, 31),
       isshowdy: false,
-      pattern: /^\s*$/g,
-      pattern1: /\d{6}/,
+      pattern: /^([1-9]{1})(\d{14}|\d{18})$/,
       formerlyName: "",
       valueNationality: "", //国籍值
       valueBirth: "", //出生地值
@@ -643,7 +646,47 @@ export default {
   font-size: 15px;
   color: #4c96d9 !important;
 }
-
+.upload_chose {
+  width: 105px;
+  height: 105px;
+  background: #f1faff;
+  border: 1px dashed #4c96d9;
+  opacity: 1;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.upload_chose_icon {
+  width: 16px;
+  height: 16px;
+  background: #4c96d9;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 16px;
+}
+.upload_chose_w {
+  font-size: 12px;
+  color: #4c96d9;
+}
+::v-deep .van-uploader__preview-image {
+  width: 105px;
+  height: 105px;
+}
+::v-deep .van-uploader__preview-delete {
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #c8c8c8;
+}
+::v-deep .van-uploader__preview-delete-icon {
+  top: -4px;
+  right: -4px;
+  font-size: 25px;
+}
 .form4 {
   margin-top: 15px;
   width: 375px;
