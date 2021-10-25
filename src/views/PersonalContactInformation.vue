@@ -2,7 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w">个人联系信息</span>
@@ -22,7 +22,7 @@
               :rules="[
                 { required: true, message: '请填写注册钉钉的手机号' },
                 {
-                  pattern ,
+                  pattern: /^1[3-9]\d{9}$/,
                   message: '请填写正确的手机号',
                 },
               ]"
@@ -47,7 +47,10 @@
               input-align="right"
               :rules="[
                 { required: true, message: '请填写Email' },
-                { validator, message: '请正确Email' },
+                {
+                  pattern: /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/,
+                  message: '请填写正确的Email',
+                },
               ]"
             />
             <!-- QQ号 -->
@@ -57,7 +60,13 @@
               label="QQ号"
               placeholder="填写你的QQ号"
               input-align="right"
-              :rules="[{ required: true, message: '请填写QQ号' }]"
+              :rules="[
+                { required: true, message: '请填写QQ号' },
+                {
+                  pattern: /^[1-9][0-9]{4,10}/,
+                  message: '请填写正确的QQ号',
+                },
+              ]"
             />
             <!-- 微信号 -->
             <van-field
@@ -66,7 +75,13 @@
               label="微信号"
               placeholder="填写你的微信号"
               input-align="right"
-              :rules="[{ required: true, message: '请填写微信号' }]"
+              :rules="[
+                { required: true, message: '请填写微信号' },
+                {
+                  pattern: /^[a-zA-Z][a-zA-Z\d_-]{5,19}$/,
+                  message: '请填写正确的微信号',
+                },
+              ]"
             />
             <!-- 通讯地址 -->
             <van-field
@@ -98,6 +113,7 @@
               placeholder="详细地址至街道门牌、楼层房间等
 详细地址至街道门牌、楼层房间等"
               autosize
+              :rules="[{ required: true, message: '请填写详细地址' }]"
             />
             <van-popup v-model="showArea" position="bottom">
               <van-area
@@ -134,7 +150,7 @@ export default {
   data() {
     return {
       isshowxxdz: false,
-      pattern: /^1[3-9]\d{9}$/,
+      // pattern: /^1[3-9]\d{9}$/,
       phone: "", //手机号
       shortPhone: "", //手机短号
       email: "", //邮箱
@@ -151,9 +167,8 @@ export default {
   },
   mounted() {},
   methods: {
-    validator(val) {
-      console.log(val);
-      return /1\d{10}/.test(val);
+    goback() {
+      this.$router.go(-1);
     },
     onpostalAddress(values) {
       //出生地
@@ -172,6 +187,7 @@ export default {
       }
     },
     onSubmit(values) {
+      sessionStorage.setItem("PersonalContactInformation", true);
       //   console.log(values[0]);
       //   console.log(values.健康状况);
       // for (var i in values) {
@@ -183,6 +199,9 @@ export default {
       //   }
       // }
       console.log("submit", values);
+      this.$router.push({
+        path: "/SubmitSuccess",
+      });
     },
   },
 };
@@ -230,7 +249,7 @@ export default {
   width: 60px;
   height: 0;
   position: relative;
-  top: 11px;
+  top: 16px;
   left: 50px;
   font-size: 15px;
   color: #4c99d8;
@@ -240,7 +259,7 @@ export default {
   width: 60px;
   height: 0;
   position: relative;
-  top: 11px;
+  top: 16px;
   left: 76px;
   font-size: 15px;
   color: #4c99d8;
@@ -281,5 +300,9 @@ textarea[class="postalAddress"]::-webkit-input-placeholder {
 }
 ::v-deep .van-field__label {
   width: auto;
+}
+::v-deep .van-cell {
+  font-size: 15px;
+  padding: 16px 12px;
 }
 </style>

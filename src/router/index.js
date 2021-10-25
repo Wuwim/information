@@ -10,44 +10,49 @@ const routes = [
     component: () => import('@/views/index.vue')
   },
   {
-    path: '/002',
+    path: '/BasicInformation',
     name: "BasicInformation",
     component: () => import('@/views/BasicInformation.vue')
   },
   {
-    path: '/003',
+    path: '/PersonalContactInformation',
     name: "PersonalContactInformation",
     component: () => import('@/views/PersonalContactInformation.vue')
   },
   {
-    path: '/004',
+    path: '/CurriculumVitae',
     name: "CurriculumVitae",
     component: () => import('@/views/CurriculumVitae.vue')
   },
   {
-    path: '/005',
+    path: '/BasicFamilyInformation',
     name: "BasicFamilyInformation",
     component: () => import('@/views/BasicFamilyInformation.vue')
   },
   {
-    path: '/006',
+    path: '/SelectFamilyNum',
     name: "SelectFamilyNum",
     component: () => import('@/views/SelectFamilyNum.vue')
   },
   {
-    path: '/007',
+    path: '/FamilyMembers',
     name: "FamilyMembers",
     component: () => import('@/views/FamilyMembers.vue')
   },
   {
-    path: '/008',
+    path: '/SelectNeedyStudents',
     name: "SelectNeedyStudents",
     component: () => import('@/views/SelectNeedyStudents.vue')
   },
   {
-    path: '/009',
+    path: '/NeedyStudents',
     name: "NeedyStudents",
     component: () => import('@/views/NeedyStudents.vue')
+  },
+  {
+    path: '/SubmitSuccess',
+    name: "SubmitSuccess",
+    component: () => import('@/views/SubmitSuccess.vue')
   },
 ]
 

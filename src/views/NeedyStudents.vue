@@ -2,7 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w">贫困生</span>
@@ -127,6 +127,9 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    goback() {
+      this.$router.go(-1);
+    },
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
       // console.log(file.content);
@@ -134,22 +137,27 @@ export default {
     },
 
     checkForm() {
+      var howadd = 0;
       for (var i = 0; i < this.arr.length; i++) {
         if (this.arr[i].isNo == false) {
-          if (i == this.arr.length - 1) {
+          howadd++;
+          if (howadd == 7) {
+            // console.log("请选择贫困原因" + "666");
             Toast("请选择贫困原因");
+            return;
           }
-        }
-      }
-      for (var k = 0; k < this.arr.length; k++) {
-        if (this.arr[k].isNo == true) {
-          if (this.fileList[k] == "") {
-            Toast("请上传" + this.arr[k].title + "的证明");
+        } else {
+          if (this.fileList[i] == "") {
+            Toast("请上传" + this.arr[i].title + "的证明");
             return;
           }
         }
       }
-      console.log("提交了~~~提交了！！！");
+      sessionStorage.setItem("NeedyStudents", true);
+
+      this.$router.push({
+        path: "/SubmitSuccess",
+      });
     },
   },
 };

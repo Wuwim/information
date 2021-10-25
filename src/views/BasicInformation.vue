@@ -2,10 +2,10 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
       <div class="block1-w-box">
-        <span class="block1-w">基础信息</span>
+        <span class="block1-w" @click="showArr">基础信息</span>
       </div>
     </div>
     <div class="form-box">
@@ -290,7 +290,13 @@
               label="农行账户"
               placeholder="填写银行卡号"
               input-align="right"
-              :rules="[{ pattern, message: '请填写银行卡号' }]"
+              :rules="[
+                { required: true, message: '请填写银行卡号' },
+                {
+                  pattern: /^([1-9]{1})(\d{14}|\d{18})$/,
+                  message: '请填写正确的银行卡号',
+                },
+              ]"
             />
           </div>
         </div>
@@ -333,7 +339,6 @@ export default {
       minDate: new Date(2010, 0, 1),
       maxDate: new Date(2021, 12, 31),
       isshowdy: false,
-      pattern: /^([1-9]{1})(\d{14}|\d{18})$/,
       formerlyName: "",
       valueNationality: "", //国籍值
       valueBirth: "", //出生地值
@@ -407,6 +412,12 @@ export default {
   },
   mounted() {},
   methods: {
+    goback() {
+      this.$router.go(-1);
+    },
+    showArr() {
+      console.log(sessionStorage.getItem("testKey"));
+    },
     onNationality(value) {
       //国籍
       this.valueNationality = value;
@@ -436,6 +447,8 @@ export default {
       this.showPolitics = false;
       if (this.valuePolitics == "党员") {
         this.isshowdy = true;
+      } else {
+        this.isshowdy = false;
       }
     },
     onConfirm(date) {
@@ -503,6 +516,7 @@ export default {
       }
     },
     onSubmit(values) {
+      sessionStorage.setItem("BasicInformation", true);
       //   console.log(values[0]);
       //   console.log(values.健康状况);
       for (var i in values) {
@@ -513,7 +527,9 @@ export default {
           break;
         }
       }
-      //   console.log("submit", values);
+      this.$router.push({
+        path: "/SubmitSuccess",
+      });
     },
   },
 };
@@ -561,7 +577,7 @@ export default {
   width: 230px;
   height: 0;
   position: relative;
-  top: 6px;
+  top: 13px;
   left: 94px;
   font-size: 14px;
 }
@@ -603,7 +619,7 @@ export default {
   width: 250px;
   height: 0;
   position: relative;
-  top: 6px;
+  top: 13px;
   left: 74px;
   font-size: 14px;
 }
@@ -647,6 +663,8 @@ export default {
   color: #4c96d9 !important;
 }
 .upload_chose {
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 105px;
   height: 105px;
   background: #f1faff;
@@ -670,12 +688,18 @@ export default {
   font-size: 12px;
   color: #4c96d9;
 }
+
+::v-deep .van-field__label {
+  color: unset;
+}
+
 ::v-deep .van-uploader__preview-image {
+  margin-top: 10px;
   width: 105px;
   height: 105px;
 }
 ::v-deep .van-uploader__preview-delete {
-  top: -8px;
+  top: 2px;
   right: -8px;
   width: 16px;
   height: 16px;
@@ -706,5 +730,9 @@ export default {
 }
 ::v-deep .van-field__label {
   width: auto;
+}
+::v-deep .van-cell {
+  font-size: 15px;
+  padding: 16px 16px;
 }
 </style>

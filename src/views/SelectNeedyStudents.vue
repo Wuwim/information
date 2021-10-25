@@ -4,7 +4,7 @@
       <!-- <img style="width: 375px" src="../img/bj2.png" alt="" /> -->
       <div class="title flex-row">
         <div class="title-goback">
-          <img class="goback" src="../img/goback1.png" alt="" />
+          <img class="goback" src="../img/goback1.png" alt="" @click="goback" />
         </div>
         <div class="title-w-box">
           <span class="title-w">贫困生</span>
@@ -45,15 +45,25 @@ export default {
   },
   mounted() {},
   methods: {
+    goback() {
+      this.$router.go(-1);
+    },
     onChange(picker, value, index) {
       this.num = index + 1;
       console.log(this.num);
       // Toast(`当前值：${value}, 当前索引：${index}`);
     },
     gonext() {
-      this.$router.push({
-        path: "009",
-      });
+      if (this.num == 1) {
+        sessionStorage.setItem("NeedyStudents", true);
+        this.$router.push({
+          path: "/",
+        });
+      } else {
+        this.$router.push({
+          path: "/NeedyStudents",
+        });
+      }
     },
   },
 };
@@ -71,7 +81,7 @@ export default {
   border-radius: 0px 0px 50px 0px;
 }
 .title {
-  margin-top: 55px;
+  margin-top: 50px;
   width: 100%;
 }
 .title-goback {
@@ -103,23 +113,23 @@ export default {
 }
 .block1-w1 {
   margin-top: 26px;
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
 }
 .block1-w2 {
   margin-top: 6px;
-  font-size: 17px;
+  font-size: 16px;
   color: #ffffff;
 }
 .block1-w3 {
-  margin-top: 14px;
+  margin-top: 12px;
   width: 16px;
   height: 0px;
   border-top: 1px solid #ffffff;
 }
 .block1-w4 {
-  margin-top: 14px;
-  font-size: 13px;
+  margin-top: 12px;
+  font-size: 12px;
   color: #b7fffa;
 }
 .block2 {
@@ -127,6 +137,7 @@ export default {
   top: 210px;
   left: 15px;
   width: 345px;
+  border-radius: 10px;
   /* height: 425px; */
 }
 .form4 {
@@ -137,7 +148,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0px 0px 10px 10px;
 }
 .form4-btn {
   width: 255px;
@@ -147,7 +158,10 @@ export default {
   color: #ffffff;
   border-radius: 23px;
 }
-/* ::v-deep .van-picker__toolbar {
-  display: none;
-} */
+::v-deep .van-picker {
+  border-radius: 10px;
+}
+::v-deep .van-picker__mask {
+  border-radius: 10px;
+}
 </style>

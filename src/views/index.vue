@@ -3,14 +3,19 @@
     <div class="block1">
       <div class="block1-1 flex-row">
         <div class="block1-1-img">
-          <img class="block1-1-img" src="../img/tx.png" alt="" />
+          <img
+            class="block1-1-img"
+            :src="message.img"
+            alt=""
+            @click="showArr"
+          />
         </div>
         <div class="block1-1-w flex-col">
           <div class="block1-1-w1">
-            <span>南南子</span>
+            <span>{{ message.name }}</span>
           </div>
-          <div class="block1-1-w2">
-            <span class="block1-1-w2-1">NO.2021010920</span>
+          <div class="block1-1-w2 flex-row">
+            <span class="block1-1-w2-1">NO.{{ message.sno }}</span>
           </div>
         </div>
         <div class="block1-1-img1">
@@ -18,18 +23,66 @@
         </div>
       </div>
       <div class="block1-2 flex-col">
-        <span class="block1-2-1">21移动1</span>
-        <span class="block1-2-2">艺术与设计学院</span>
+        <span class="block1-2-1">{{ message.class }}</span>
+        <span class="block1-2-2">{{ message.college }}</span>
       </div>
     </div>
     <div class="block2 flex-row">
       <div class="block2-left flex-col">
-        <img class="finish-x" src="../img/finish-x.png" alt="" />
-        <img class="finish-x" src="../img/finish-x.png" alt="" />
-        <img class="finish-x" src="../img/finish-x.png" alt="" />
-        <img class="finish-x" src="../img/finish-x.png" alt="" />
-        <img class="finish-x" src="../img/finish-x.png" alt="" />
-        <img class="finish-x" src="../img/finish.png" alt="" />
+        <img
+          class="finish-x"
+          :src="
+            this.arr[0] == 'false'
+              ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
+              : 'http://qn.zheskill.xyz/73154734-ec7c-4432-8473-5dde40e11640.png'
+          "
+          alt=""
+        />
+        <img
+          class="finish-x"
+          :src="
+            this.arr[1] == 'false'
+              ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
+              : 'http://qn.zheskill.xyz/73154734-ec7c-4432-8473-5dde40e11640.png'
+          "
+          alt=""
+        />
+        <img
+          class="finish-x"
+          :src="
+            this.arr[2] == 'false'
+              ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
+              : 'http://qn.zheskill.xyz/73154734-ec7c-4432-8473-5dde40e11640.png'
+          "
+          alt=""
+        />
+        <img
+          class="finish-x"
+          :src="
+            this.arr[3] == 'false'
+              ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
+              : 'http://qn.zheskill.xyz/73154734-ec7c-4432-8473-5dde40e11640.png'
+          "
+          alt=""
+        />
+        <img
+          class="finish-x"
+          :src="
+            this.arr[4] == 'false'
+              ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
+              : 'http://qn.zheskill.xyz/73154734-ec7c-4432-8473-5dde40e11640.png'
+          "
+          alt=""
+        />
+        <img
+          class="finish-x"
+          :src="
+            this.arr[5] == 'false'
+              ? 'http://qn.zheskill.xyz/44fd63e1-5c41-4e58-b694-17bd7363ac1b.png'
+              : 'http://qn.zheskill.xyz/c6a08c2f-d8fe-422b-9ce7-3cfc61941e24.png'
+          "
+          alt=""
+        />
       </div>
       <div class="block2-right flex-col">
         <div class="flex-row jbxx">
@@ -38,8 +91,12 @@
             <span class="block2-right-w2">Basic information</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn" @click="goBasicInformation()">
-            填写
+          <button
+            class="block2-right-btn"
+            :class="this.arr[0] == 'false' ? '' : 'btywc'"
+            @click="goBasicInformation()"
+          >
+            {{ this.arr[0] == "false" ? "填写" : "已完成" }}
           </button>
         </div>
         <div class="flex-row jbxx">
@@ -48,7 +105,13 @@
             <span class="block2-right-w2">Personal contact information</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn">填写</button>
+          <button
+            class="block2-right-btn"
+            :class="this.arr[1] == 'false' ? '' : 'btywc'"
+            @click="goPersonalContactInformation()"
+          >
+            {{ this.arr[1] == "false" ? "填写" : "已完成" }}
+          </button>
         </div>
         <div class="flex-row jbxx">
           <div class="flex-col">
@@ -56,7 +119,13 @@
             <span class="block2-right-w2">Curriculum vitae</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn">填写</button>
+          <button
+            class="block2-right-btn"
+            :class="this.arr[2] == 'false' ? '' : 'btywc'"
+            @click="goCurriculumVitae()"
+          >
+            {{ this.arr[2] == "false" ? "填写" : "已完成" }}
+          </button>
         </div>
         <div class="flex-row jbxx">
           <div class="flex-col">
@@ -64,7 +133,13 @@
             <span class="block2-right-w2">Family basic information</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn">填写</button>
+          <button
+            class="block2-right-btn"
+            :class="this.arr[3] == 'false' ? '' : 'btywc'"
+            @click="goBasicFamilyInformation()"
+          >
+            {{ this.arr[3] == "false" ? "填写" : "已完成" }}
+          </button>
         </div>
         <div class="flex-row jbxx">
           <div class="flex-col">
@@ -72,7 +147,13 @@
             <span class="block2-right-w2">Member of family</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn">填写</button>
+          <button
+            class="block2-right-btn"
+            :class="this.arr[4] == 'false' ? '' : 'btywc'"
+            @click="goSelectFamilyNum()"
+          >
+            {{ this.arr[4] == "false" ? "填写" : "已完成" }}
+          </button>
         </div>
         <div class="flex-row jbxx">
           <div class="flex-col">
@@ -80,7 +161,13 @@
             <span class="block2-right-w2">Poor students</span>
           </div>
           <!-- <button class="block2-right-btn">填写</button> -->
-          <button class="block2-right-btn btywc">已完成</button>
+          <button
+            class="block2-right-btn"
+            :class="this.arr[5] == 'false' ? '' : 'btywc'"
+            @click="goSelectNeedyStudents()"
+          >
+            {{ this.arr[5] == "false" ? "填写" : "已完成" }}
+          </button>
         </div>
       </div>
     </div>
@@ -91,15 +178,78 @@
 export default {
   data() {
     return {
-      phone: "",
-      password: "",
+      message: {
+        img: "http://qn.zheskill.xyz/1.jfif",
+        name: "绝绝子",
+        sno: "2021010555",
+        class: "21移动1",
+        college: "信息媒体学院  ",
+      },
+      arr: {
+        0: "false",
+        1: "false",
+        2: "false",
+        3: "false",
+        4: "false",
+        5: "false",
+      },
     };
+  },
+  beforeUpdate() {
+    // sessionStorage.setItem("testKey", "这是一个测试的value值");
+  },
+
+  beforeMount() {
+    if (JSON.parse(sessionStorage.getItem("BasicInformation")) == null) {
+      console.log(11111);
+      sessionStorage.setItem("BasicInformation", false);
+      sessionStorage.setItem("PersonalContactInformation", false);
+      sessionStorage.setItem("CurriculumVitae", false);
+      sessionStorage.setItem("BasicFamilyInformation", false);
+      sessionStorage.setItem("FamilyMembers", false);
+      sessionStorage.setItem("NeedyStudents", false);
+    }
+
+    this.arr[0] = sessionStorage.getItem("BasicInformation");
+    this.arr[1] = sessionStorage.getItem("PersonalContactInformation");
+    this.arr[2] = sessionStorage.getItem("CurriculumVitae");
+    this.arr[3] = sessionStorage.getItem("BasicFamilyInformation");
+    this.arr[4] = sessionStorage.getItem("FamilyMembers");
+    this.arr[5] = sessionStorage.getItem("NeedyStudents");
   },
   mounted() {},
   methods: {
+    showArr() {
+      console.log(this.arr);
+    },
     goBasicInformation() {
       this.$router.push({
-        path: "002",
+        path: "/BasicInformation",
+      });
+    },
+    goPersonalContactInformation() {
+      this.$router.push({
+        path: "/PersonalContactInformation",
+      });
+    },
+    goCurriculumVitae() {
+      this.$router.push({
+        path: "/CurriculumVitae",
+      });
+    },
+    goBasicFamilyInformation() {
+      this.$router.push({
+        path: "/BasicFamilyInformation",
+      });
+    },
+    goSelectFamilyNum() {
+      this.$router.push({
+        path: "/SelectFamilyNum",
+      });
+    },
+    goSelectNeedyStudents() {
+      this.$router.push({
+        path: "/SelectNeedyStudents",
       });
     },
   },
@@ -108,6 +258,9 @@ export default {
 
 <style scoped>
 @import "../assets/css/common.css";
+.content {
+  height: 100vh;
+}
 .block1 {
   width: 100vw;
   height: 278px;
@@ -123,7 +276,7 @@ export default {
 .block1-1-img {
   width: 64px;
   height: 64px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .block1-1-w {
   margin-left: 14px;
@@ -134,12 +287,12 @@ export default {
 }
 .block1-1-w2 {
   margin-top: 8px;
-  font-size: 12px;
   border: 1px solid #ffffff;
   border-radius: 20px;
+  font-size: 12px;
 }
 .block1-1-w2-1 {
-  padding: 6px 8px;
+  padding: 4px 8px;
 }
 .block1-1-img1 {
   margin-left: 130px;
@@ -210,7 +363,7 @@ export default {
 .btywc {
   background: #c8c8c8;
 }
-.btywc {
+.btModify {
   background: #50c9c3;
 }
 </style>

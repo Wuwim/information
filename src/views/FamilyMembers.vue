@@ -2,7 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w">基础信息</span>
@@ -282,7 +282,7 @@
         <button class="btn" @click="checkForm" v-show="!isFinally">
           保存并填写下一个
         </button>
-        <button class="btn" v-show="isFinally">提交</button>
+        <button class="btn" v-show="isFinally" @click="submit">提交</button>
       </div>
       <!-- </form> -->
     </div>
@@ -330,6 +330,9 @@ export default {
   },
   mounted() {},
   methods: {
+    goback() {
+      this.$router.go(-1);
+    },
     con() {
       console.log(this.homePhone + "2");
       console.log(this.number);
@@ -422,120 +425,129 @@ export default {
     },
     checkForm() {
       console.log();
-      // if (this.allMessage[this.several - 1].relativeName == "") {
-      //   this.errorText = "亲属名字不能为空";
-      //   this.isShowError = true;
-      //   this.isErrorRelativeName = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorRelativeName = false;
-      // }
+      if (this.allMessage[this.several - 1].relativeName == "") {
+        this.errorText = "亲属名字不能为空";
+        this.isShowError = true;
+        this.isErrorRelativeName = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorRelativeName = false;
+      }
 
-      // if (this.allMessage[this.several - 1].peopleSex == "") {
-      //   this.errorText = "请选择性别";
-      //   this.isShowError = true;
-      //   this.isErrorPeopleSex = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorPeopleSex = false;
-      // }
+      if (this.allMessage[this.several - 1].peopleSex == "") {
+        this.errorText = "请选择性别";
+        this.isShowError = true;
+        this.isErrorPeopleSex = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorPeopleSex = false;
+      }
 
-      // if (this.allMessage[this.several - 1].birthday == "") {
-      //   this.errorText = "请填写出生日期";
-      //   this.isShowError = true;
-      //   this.isErrorBirthday = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorBirthday = false;
-      // }
+      if (this.allMessage[this.several - 1].birthday == "") {
+        this.errorText = "请填写出生日期";
+        this.isShowError = true;
+        this.isErrorBirthday = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorBirthday = false;
+      }
 
-      // if (this.allMessage[this.several - 1].relationship == "") {
-      //   this.errorText = "与本人关系不能为空";
-      //   this.isShowError = true;
-      //   this.isErrorRelationship = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorRelationship = false;
-      // }
+      if (this.allMessage[this.several - 1].relationship == "") {
+        this.errorText = "与本人关系不能为空";
+        this.isShowError = true;
+        this.isErrorRelationship = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorRelationship = false;
+      }
 
-      // if (this.allMessage[this.several - 1].homeAddress == "") {
-      //   this.errorText = "请选择地点";
-      //   this.isShowError = true;
-      //   this.isErrorHomeAddress = true;
-      //   return;
-      // } else if (this.allMessage[this.several - 1].addressDetail.length < 10) {
-      //   this.errorText = "地址可以写的更详细点";
-      //   this.isShowError = true;
-      //   this.isErrorHomeAddress = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorHomeAddress = false;
-      // }
+      if (this.allMessage[this.several - 1].homeAddress == "") {
+        this.errorText = "请选择地点";
+        this.isShowError = true;
+        this.isErrorHomeAddress = true;
+        return;
+      } else if (this.allMessage[this.several - 1].addressDetail.length < 10) {
+        this.errorText = "地址可以写的更详细点";
+        this.isShowError = true;
+        this.isErrorHomeAddress = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorHomeAddress = false;
+      }
 
-      // if (this.allMessage[this.several - 1].workUnit == "") {
-      //   this.errorText = "工作(学习)单位不能为空";
-      //   this.isShowError = true;
-      //   this.isErrorWorkUnit = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorWorkUnit = false;
-      // }
+      if (this.allMessage[this.several - 1].workUnit == "") {
+        this.errorText = "工作(学习)单位不能为空";
+        this.isShowError = true;
+        this.isErrorWorkUnit = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorWorkUnit = false;
+      }
 
-      // if (this.allMessage[this.several - 1].occupation == "") {
-      //   this.errorText = "职业不能为空";
-      //   this.isShowError = true;
-      //   this.isErrorOccupation = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorOccupation = false;
-      // }
+      if (this.allMessage[this.several - 1].occupation == "") {
+        this.errorText = "职业不能为空";
+        this.isShowError = true;
+        this.isErrorOccupation = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorOccupation = false;
+      }
 
-      // if (this.allMessage[this.several - 1].annualIncome == "") {
-      //   this.errorText = "请填写年收入";
-      //   this.isShowError = true;
-      //   this.isErrorAnnualIncome = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorAnnualIncome = false;
-      // }
+      if (this.allMessage[this.several - 1].annualIncome == "") {
+        this.errorText = "请填写年收入";
+        this.isShowError = true;
+        this.isErrorAnnualIncome = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorAnnualIncome = false;
+      }
 
-      // if (this.allMessage[this.several - 1].health == "") {
-      //   this.errorText = "请选择健康状况";
-      //   this.isShowError = true;
-      //   this.isErrorHealth = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorHealth = false;
-      // }
+      if (this.allMessage[this.several - 1].health == "") {
+        this.errorText = "请选择健康状况";
+        this.isShowError = true;
+        this.isErrorHealth = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorHealth = false;
+      }
 
-      // if (this.allMessage[this.several - 1].contactNumber == "") {
-      //   this.errorText = "联系电话不能为空";
-      //   this.isShowError = true;
-      //   this.isErrorContactNumber = true;
-      //   return;
-      // } else {
-      //   this.errorText = "";
-      //   this.isShowError = false;
-      //   this.isErrorContactNumber = false;
-      // }
+      if (this.allMessage[this.several - 1].contactNumber == "") {
+        this.errorText = "联系电话不能为空";
+        this.isShowError = true;
+        this.isErrorContactNumber = true;
+        return;
+      } else if (
+        !/^1(3|4|5|7|8)\d{9}$/.test(
+          this.allMessage[this.several - 1].contactNumber
+        )
+      ) {
+        this.errorText = "请输入正确的电话号码";
+        this.isShowError = true;
+        this.isErrorContactNumber = true;
+        return;
+      } else {
+        this.errorText = "";
+        this.isShowError = false;
+        this.isErrorContactNumber = false;
+      }
 
       this.familyNum[this.several - 1].peopleName =
         this.allMessage[this.several - 1].relativeName;
@@ -558,6 +570,13 @@ export default {
       //   }
       // }
       //   console.log("submit", values);
+    },
+    submit() {
+      sessionStorage.setItem("FamilyMembers", true);
+      this.$router.push({
+        path: "/SubmitSuccess",
+      });
+      console.log(111);
     },
   },
 };

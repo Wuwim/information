@@ -2,12 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img
-          class="goback"
-          @click="goBack()"
-          src="../img/goback.png"
-          alt=""
-        />
+        <img class="goback" @click="goback" src="../img/goback.png" alt="" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w">个人联系信息</span>
@@ -37,6 +32,7 @@
               placeholder="选择时间 >"
               @click="showCalendar = true"
               input-align="right"
+              :rules="[{ required: true, message: '请选择开始时间' }]"
             />
             <van-calendar
               :min-date="minDate"
@@ -54,6 +50,7 @@
               placeholder="选择时间 >"
               @click="showCalendar1 = true"
               input-align="right"
+              :rules="[{ required: true, message: '请选择结束时间' }]"
             />
             <van-calendar
               :min-date="minDate"
@@ -121,6 +118,7 @@
               placeholder="选择时间 >"
               @click="showCalendar2 = true"
               input-align="right"
+              :rules="[{ required: true, message: '请选择开始时间' }]"
             />
             <van-calendar
               :min-date="minDate"
@@ -138,6 +136,7 @@
               placeholder="选择时间 >"
               @click="showCalendar3 = true"
               input-align="right"
+              :rules="[{ required: true, message: '请选择结束时间' }]"
             />
             <van-calendar
               :min-date="minDate"
@@ -205,6 +204,7 @@
               placeholder="选择时间 >"
               @click="showCalendar4 = true"
               input-align="right"
+              :rules="[{ required: true, message: '请选择开始时间' }]"
             />
             <van-calendar
               :min-date="minDate"
@@ -222,6 +222,7 @@
               placeholder="选择时间 >"
               @click="showCalendar5 = true"
               input-align="right"
+              :rules="[{ required: true, message: '请选择结束时间' }]"
             />
             <van-calendar
               :min-date="minDate"
@@ -314,7 +315,7 @@ export default {
   },
   mounted() {},
   methods: {
-    goBack() {
+    goback() {
       //返回上一级
       this.$router.go(-1);
     },
@@ -368,6 +369,10 @@ export default {
     },
 
     onSubmit(values) {
+      sessionStorage.setItem("CurriculumVitae", true);
+      this.$router.push({
+        path: "/SubmitSuccess",
+      });
       console.log(values);
       //   console.log(values.健康状况);
       // for (var i in values) {
@@ -466,5 +471,9 @@ export default {
   // width: auto;
   font-size: 15px;
   color: #4a4a4a;
+}
+::v-deep .van-cell {
+  font-size: 15px;
+  padding: 16px 15px;
 }
 </style>

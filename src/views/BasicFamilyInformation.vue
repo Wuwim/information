@@ -2,7 +2,7 @@
   <div class="content">
     <div class="block1 flex-row">
       <div class="goback-box">
-        <img class="goback" src="../img/goback.png" alt="" />
+        <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
       <div class="block1-w-box">
         <span class="block1-w" @click="con">基础信息</span>
@@ -14,120 +14,120 @@
     </div>
     <div class="form-box">
       <!-- @submit="checkForm" -->
-      <form action="">
-        <div class="form1-box">
-          <div :class="isErrorjtdh ? 'form1' : ''">
-            <!-- 家庭电话 -->
-            <div class="item_box flex-row">
-              <div class="item_title">家庭电话</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjtdh ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写家庭电话"
-                  v-model="homePhone"
-                />
-              </div>
+      <!-- <form action="" onsubmit="return checkForm"> -->
+      <div class="form1-box">
+        <div :class="isErrorjtdh ? 'form1' : ''">
+          <!-- 家庭电话 -->
+          <div class="item_box flex-row">
+            <div class="item_title">家庭电话</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorjtdh ? 'error_color' : ''"
+                type="text"
+                placeholder="填写家庭电话"
+                v-model="homePhone"
+              />
             </div>
-            <div class="fgx"></div>
           </div>
+          <div class="fgx"></div>
+        </div>
 
-          <div :class="isErrorjtdz ? 'form1' : ''">
-            <!-- 家庭地址 -->
-            <div class="item_box flex-row">
-              <div class="item_title">家庭地址</div>
-              <div class="item_content">
-                <input
-                  readonly="readonly"
-                  class="item_input"
-                  :class="isErrorjtdz ? 'error_color' : ''"
-                  type="text"
-                  placeholder="选择省市区 >"
-                  v-model="homeAddress"
-                  @click="showArea = true"
-                />
-              </div>
-              <van-popup v-model="showArea" position="bottom">
-                <van-area
-                  type="submit"
-                  :area-list="areaList"
-                  @confirm="onpostalAddress"
-                  @cancel="showArea = false"
-                />
-              </van-popup>
+        <div :class="isErrorjtdz ? 'form1' : ''">
+          <!-- 家庭地址 -->
+          <div class="item_box flex-row">
+            <div class="item_title">家庭地址</div>
+            <div class="item_content">
+              <input
+                readonly="readonly"
+                class="item_input"
+                :class="isErrorjtdz ? 'error_color' : ''"
+                type="text"
+                placeholder="选择省市区 >"
+                v-model="homeAddress"
+                @click="showArea = true"
+              />
             </div>
-            <textarea
-              name="通讯地址"
-              type="text"
-              :class="isErrorjtdz ? 'error_color' : ''"
-              class="homeAddress"
-              placeholder="详细地址至街道门牌、楼层房间等
+            <van-popup v-model="showArea" position="bottom">
+              <van-area
+                type="submit"
+                :area-list="areaList"
+                @confirm="onpostalAddress"
+                @cancel="showArea = false"
+              />
+            </van-popup>
+          </div>
+          <textarea
+            name="通讯地址"
+            type="text"
+            :class="isErrorjtdz ? 'error_color' : ''"
+            class="homeAddress"
+            placeholder="详细地址至街道门牌、楼层房间等
 详细地址至街道门牌、楼层房间等"
-              v-model="addressDetail"
-            />
-            <!-- @mouseleave="addressDetailed" -->
-            <div class="fgx"></div>
-          </div>
+            v-model="addressDetail"
+          />
+          <!-- @mouseleave="addressDetailed" -->
+          <div class="fgx"></div>
+        </div>
 
-          <div class="">
-            <!-- 邮政编码 -->
-            <div class="item_box flex-row">
-              <div class="item_title">
-                邮政编码<span class="optional"> (选填)</span>
-              </div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  type="text"
-                  placeholder="填写邮政编码"
-                  v-model="postalCode"
-                />
-              </div>
+        <div class="">
+          <!-- 邮政编码 -->
+          <div class="item_box flex-row">
+            <div class="item_title">
+              邮政编码<span class="optional"> (选填)</span>
             </div>
-            <div class="fgx"></div>
-          </div>
-
-          <div :class="isErrorjhr ? 'form1' : ''">
-            <!-- 紧急联系人(监护人) -->
-            <div class="item_box flex-row">
-              <div class="item_title">紧急联系人(监护人)</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjhr ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写联系人姓名"
-                  v-model="emergencyContact"
-                />
-              </div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                type="text"
+                placeholder="填写邮政编码"
+                v-model="postalCode"
+              />
             </div>
-            <div class="fgx"></div>
           </div>
+          <div class="fgx"></div>
+        </div>
 
-          <div :class="isErrorjhr1 ? 'form1' : ''">
-            <!-- 紧急联系人电话 -->
-            <div class="item_box flex-row">
-              <div class="item_title">紧急联系人电话</div>
-              <div class="item_content">
-                <input
-                  class="item_input"
-                  :class="isErrorjhr1 ? 'error_color' : ''"
-                  type="text"
-                  placeholder="填写联系人电话"
-                  v-model="EmergencyContactNumber"
-                />
-              </div>
+        <div :class="isErrorjhr ? 'form1' : ''">
+          <!-- 紧急联系人(监护人) -->
+          <div class="item_box flex-row">
+            <div class="item_title">紧急联系人(监护人)</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorjhr ? 'error_color' : ''"
+                type="text"
+                placeholder="填写联系人姓名"
+                v-model="emergencyContact"
+              />
+            </div>
+          </div>
+          <div class="fgx"></div>
+        </div>
+
+        <div :class="isErrorjhr1 ? 'form1' : ''">
+          <!-- 紧急联系人电话 -->
+          <div class="item_box flex-row">
+            <div class="item_title">紧急联系人电话</div>
+            <div class="item_content">
+              <input
+                class="item_input"
+                :class="isErrorjhr1 ? 'error_color' : ''"
+                type="text"
+                placeholder="填写联系人电话"
+                v-model="EmergencyContactNumber"
+              />
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- 提交按钮 -->
-        <div class="btn_box">
-          <!-- type="submit" -->
-          <button class="btn" @click="checkForm">提交</button>
-        </div>
-      </form>
+      <!-- 提交按钮 -->
+      <div class="btn_box">
+        <!-- @click="checkForm" -->
+        <button class="btn" type="bottom" @click="checkForm">提交</button>
+      </div>
+      <!-- </form> -->
     </div>
   </div>
 </template>
@@ -156,6 +156,9 @@ export default {
   },
   mounted() {},
   methods: {
+    goback() {
+      this.$router.go(-1);
+    },
     con() {
       console.log(this.homePhone);
     },
@@ -216,7 +219,7 @@ export default {
         this.isShowError = true;
         this.isErrorjhr1 = true;
         return;
-      } else if (!/^1(3|4|5|7|8)\d{9}$/.test(this.homePhone)) {
+      } else if (!/^1(3|4|5|7|8)\d{9}$/.test(this.EmergencyContactNumber)) {
         this.errorText = "手机号码有误，请重新输入";
         this.isShowError = true;
         this.isErrorjhr1 = true;
@@ -227,16 +230,11 @@ export default {
         this.isErrorjhr1 = false;
       }
 
-      //   console.log(values.健康状况);
-      // for (var i in values) {
-      //   console.log(values[i]);
-      //   if (values[i] == "") {
-      //     //   console.log("曾用名为空");
-      //     Toast("表单未填写完整");
-      //     break;
-      //   }
-      // }
-      //   console.log("submit", values);
+      sessionStorage.setItem("BasicFamilyInformation", true);
+
+      this.$router.push({
+        path: "/SubmitSuccess",
+      });
     },
   },
 };
