@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="block1">
+    <div class="block1 flex-col">
       <div class="block1-1 flex-row">
         <div class="block1-1-img">
           <img

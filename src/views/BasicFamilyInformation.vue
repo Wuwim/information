@@ -5,7 +5,7 @@
         <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
       <div class="block1-w-box">
-        <span class="block1-w" @click="con">基础信息</span>
+        <span class="block1-w" @click="con">家庭基础信息</span>
       </div>
     </div>
     <div class="error flex-row" v-show="isShowError">
@@ -339,6 +339,7 @@ input::-webkit-input-placeholder {
   height: 50px;
   border: none;
   padding: 0;
+  resize: none;
 }
 textarea[class="homeAddress"]::-webkit-input-placeholder {
   font-size: 15px;

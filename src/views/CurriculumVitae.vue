@@ -5,7 +5,7 @@
         <img class="goback" @click="goback" src="../img/goback.png" alt="" />
       </div>
       <div class="block1-w-box">
-        <span class="block1-w">个人联系信息</span>
+        <span class="block1-w">个人简历</span>
       </div>
     </div>
     <div class="form-box">

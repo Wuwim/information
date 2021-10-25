@@ -5,8 +5,17 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   background: #F4F6F5;
+}
+
+.block1 {
+  display: flex;
+}
+
+.form-box {
+  flex: 1;
+  overflow-y: scroll;
 }
 
 .flex-col {

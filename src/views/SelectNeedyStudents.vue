@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="block1">
+    <div class="block1_box">
       <!-- <img style="width: 375px" src="../img/bj2.png" alt="" /> -->
       <div class="title flex-row">
         <div class="title-goback">
@@ -74,7 +74,7 @@ export default {
 .content {
   height: 100vh;
 }
-.block1 {
+.block1_box {
   width: 375px;
   height: 278px;
   background: linear-gradient(90deg, #4c96da 0%, #50c9c2 100%);
