@@ -394,7 +394,6 @@ textarea[class="homeAddress"]::-webkit-input-placeholder {
 }
 
 .btn_box {
-  margin-top: 15px;
   width: 375px;
   height: 75px;
   background: #ffffff;
