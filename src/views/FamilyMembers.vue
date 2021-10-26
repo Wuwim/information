@@ -295,8 +295,8 @@ import { areaList } from "@vant/area-data";
 export default {
   data() {
     return {
-      minDate: new Date(1990, 0, 1),
-      maxDate: new Date(2010, 10, 1),
+      minDate: new Date(1900, 0, 1),
+      maxDate: new Date(2021, 11, 1),
       number: 0,
       several: 1,
       isFinally: false,
@@ -403,9 +403,9 @@ export default {
     showtime(date) {
       //出生日期
       // console.log(date);
-      this.allMessage[this.several - 1].birthday = `${date.getFullYear()}-${
+      this.allMessage[this.several - 1].birthday = `${date.getFullYear()}/${
         date.getMonth() + 1
-      }-${date.getDate()}`;
+      }/${date.getDate()}`;
       this.allMessage[this.several - 1].age = 2021 - date.getFullYear();
       this.showCalendar = false;
     },
@@ -731,14 +731,12 @@ export default {
   width: 150px;
   border: none;
   text-align: right;
-  // direction: rtl;
 }
 .item_input1 {
   margin-top: 20px;
   padding: 0;
   width: 100%;
   border: none;
-  // direction: rtl;
 }
 input::-webkit-input-placeholder {
   color: #c8c8c8;
@@ -756,6 +754,7 @@ input::-webkit-input-placeholder {
   height: 50px;
   border: none;
   padding: 0;
+  resize: none;
 }
 textarea[class="homeAddress"]::-webkit-input-placeholder {
   font-size: 15px;
