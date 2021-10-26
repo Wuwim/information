@@ -30,7 +30,7 @@
     <div class="block2 flex-row">
       <div class="block2-left flex-col">
         <img
-          class="finish-x"
+          :class="this.arr[0] == 'false' ? 'finish-x1' : 'finish-x'"
           :src="
             this.arr[0] == 'false'
               ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
@@ -39,7 +39,7 @@
           alt=""
         />
         <img
-          class="finish-x"
+          :class="this.arr[1] == 'false' ? 'finish-x1' : 'finish-x'"
           :src="
             this.arr[1] == 'false'
               ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
@@ -48,7 +48,7 @@
           alt=""
         />
         <img
-          class="finish-x"
+          :class="this.arr[2] == 'false' ? 'finish-x1' : 'finish-x'"
           :src="
             this.arr[2] == 'false'
               ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
@@ -57,7 +57,7 @@
           alt=""
         />
         <img
-          class="finish-x"
+          :class="this.arr[3] == 'false' ? 'finish-x1' : 'finish-x'"
           :src="
             this.arr[3] == 'false'
               ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
@@ -66,7 +66,7 @@
           alt=""
         />
         <img
-          class="finish-x"
+          :class="this.arr[4] == 'false' ? 'finish-x1' : 'finish-x'"
           :src="
             this.arr[4] == 'false'
               ? 'http://qn.zheskill.xyz/4ff25663-b921-40e6-8354-92701aebba0d.png'
@@ -75,7 +75,7 @@
           alt=""
         />
         <img
-          class="finish-x"
+          :class="this.arr[5] == 'false' ? 'finish-x1' : 'finish-x'"
           :src="
             this.arr[5] == 'false'
               ? 'http://qn.zheskill.xyz/44fd63e1-5c41-4e58-b694-17bd7363ac1b.png'
@@ -329,6 +329,10 @@ export default {
 }
 .finish-x {
   margin-top: 2px;
+  width: 24px;
+}
+.finish-x1 {
+  margin-top: 4px;
   width: 24px;
 }
 .block2-right {
