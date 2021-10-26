@@ -268,7 +268,7 @@ export default {
 }
 
 .error {
-  width: 375px;
+  width: 100%;
   height: 30px;
   background: #fceded;
   opacity: 1;
@@ -350,7 +350,7 @@ textarea[class="homeAddress"]::-webkit-input-placeholder {
 .btn_box {
   position: absolute;
   bottom: -0px;
-  width: 375px;
+  width: 100%;
   height: 75px;
   background: #ffffff;
 }
