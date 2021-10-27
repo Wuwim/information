@@ -59,7 +59,7 @@
             </van-uploader>
           </div>
 
-          <div class="fgx"></div>
+          <div class="fgx" v-show="item.title != '是否低保边缘户'"></div>
         </div>
       </div>
       <!-- 提交按钮 -->
@@ -394,6 +394,8 @@ textarea[class="homeAddress"]::-webkit-input-placeholder {
 }
 
 .btn_box {
+  position: absolute;
+  bottom: -0px;
   width: 375px;
   height: 75px;
   background: #ffffff;

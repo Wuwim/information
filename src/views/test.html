@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        ul li {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul li::before {
+            z-index: 2;
+            content: "\2714";
+            width: 3rem;
+            height: 3rem;
+            background: #bcbcbc;
+            box-shadow: 0 0 0 0.5rem #cac, 0 0 0 1rem #00bc9b;
+            border-radius: 50%;
+            margin: 1rem;
+            display: block;
+
+            display: flex;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        ul li:nth-child(n+2):after {
+            content: '';
+            height: .3rem;
+            width: 100%;
+            background: #bcbcbc;
+            position: absolute;
+            left: -50%;
+            /* 刚好以圆中心从右往左 */
+        }
+
+        ul li.active:nth-child(n+2)::after {
+            background: #00bc9b;
+        }
+
+        ul li.active::before {
+            background: #00bc9b;
+            box-shadow: 0 0 0 0.5rem rgb(255 255 255), 0 0 0 1rem #00bc9b;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+
+</html>
