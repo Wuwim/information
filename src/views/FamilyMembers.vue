@@ -20,7 +20,7 @@
             class="scorll_title"
             :class="item.isOk ? 'scorll_title_w' : 'scorll_title_w1'"
           >
-            {{ item.isOk ? "√" : item.title }}
+            {{ item.isOk ? "&#10004" : item.title }}
           </div>
           <div class="scorll_body">{{ item.peopleName }}</div>
         </div>

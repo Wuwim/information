@@ -1,4 +1,4 @@
-# dati
+# information
 
 ## Project setup
 ```
