@@ -1,21 +1,21 @@
 <template>
   <div class="content">
     <div class="block1 flex-row">
-      <div class="goback-box">
+      <div class="goback_box">
         <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
-      <div class="block1-w-box">
-        <span class="block1-w" @click="con">家庭基础信息</span>
+      <div class="block1_w_box">
+        <span class="block1_w" @click="con">家庭基础信息</span>
       </div>
     </div>
     <div class="error flex-row" v-show="isShowError">
       <img class="error_voice" src="../img/voice.png" alt="" />
-      <span class="error_w">{{ errorText }}</span>
+      <span class="error_w flex_1">{{ errorText }}</span>
     </div>
-    <div class="form-box">
+    <div class="form_box">
       <!-- @submit="checkForm" -->
       <!-- <form action="" onsubmit="return checkForm"> -->
-      <div class="form1-box">
+      <div class="form1_box">
         <div :class="isErrorjtdh ? 'form1' : ''">
           <!-- 家庭电话 -->
           <div class="item_box flex-row">
@@ -134,7 +134,6 @@
 
 <script>
 import { areaList } from "@vant/area-data";
-// import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -157,7 +156,9 @@ export default {
   mounted() {},
   methods: {
     goback() {
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/",
+      });
     },
     con() {
       console.log(this.homePhone);
@@ -233,7 +234,7 @@ export default {
       sessionStorage.setItem("BasicFamilyInformation", true);
 
       this.$router.push({
-        path: "/SubmitSuccess",
+        path: "/submitSuccess",
       });
     },
   },
@@ -248,11 +249,11 @@ export default {
   background: #ffffff;
   align-items: center;
 }
-.goback-box {
+.goback_box {
   width: 20%;
   padding-top: 26px;
 }
-.block1-w-box {
+.block1_w_box {
   width: 60%;
   text-align: center;
   padding-top: 26px;
@@ -262,32 +263,30 @@ export default {
   width: 10px;
   height: 18px;
 }
-.block1-w {
+.block1_w {
   font-size: 17px;
   font-weight: 500;
 }
 
 .error {
-  width: 100%;
-  height: 30px;
+  padding: 5px 15px;
   background: #fceded;
   opacity: 1;
   align-items: center;
 }
 .error_voice {
-  margin-left: 15px;
+  margin-right: 10px;
   width: 10px;
   height: 9px;
 }
 .error_w {
-  margin-left: 8px;
   font-size: 12px;
   color: #e63535;
 }
 .error_color {
   background: #fceded;
 }
-.form1-box {
+.form1_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;

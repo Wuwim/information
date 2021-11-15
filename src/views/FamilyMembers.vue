@@ -1,11 +1,11 @@
 <template>
   <div class="content">
     <div class="block1 flex-row">
-      <div class="goback-box">
+      <div class="goback_box">
         <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
-      <div class="block1-w-box">
-        <span class="block1-w">基础信息</span>
+      <div class="block1_w_box">
+        <span class="block1_w">基础信息</span>
       </div>
     </div>
     <div class="scorll_box flex-row">
@@ -20,7 +20,7 @@
             class="scorll_title"
             :class="item.isOk ? 'scorll_title_w' : 'scorll_title_w1'"
           >
-            {{ item.isOk ? "&#10004" : item.title }}
+            {{ item.isOk ? "&#10004;" : item.title }}
           </div>
           <div class="scorll_body">{{ item.peopleName }}</div>
         </div>
@@ -29,9 +29,9 @@
     </div>
     <div class="error flex-row" v-show="isShowError">
       <img class="error_voice" src="../img/voice.png" alt="" />
-      <span class="error_w">{{ errorText }}</span>
+      <span class="error_w flex_1">{{ errorText }}</span>
     </div>
-    <div class="form-box">
+    <div class="form_box">
       <!-- @submit="checkForm" -->
       <!-- <form action=""> -->
       <div class="form1-box">
@@ -295,6 +295,7 @@ import { areaList } from "@vant/area-data";
 export default {
   data() {
     return {
+      dui: "&#10004",
       minDate: new Date(1900, 0, 1),
       maxDate: new Date(2021, 11, 1),
       number: 0,
@@ -331,7 +332,9 @@ export default {
   mounted() {},
   methods: {
     goback() {
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/",
+      });
     },
     con() {
       console.log(this.homePhone + "2");
@@ -374,7 +377,6 @@ export default {
           { gender: "女", checked: false },
         ]);
       }
-      console.log(this.gender);
     },
     checked(index) {
       //选中成员
@@ -425,6 +427,13 @@ export default {
     },
     checkForm() {
       console.log();
+      if (this.several - 1 > 0) {
+        if (this.allMessage[this.several - 2].relativeName == "") {
+          this.errorText = "请先填写上一个表单";
+          this.isShowError = true;
+          return;
+        }
+      }
       if (this.allMessage[this.several - 1].relativeName == "") {
         this.errorText = "亲属名字不能为空";
         this.isShowError = true;
@@ -559,22 +568,11 @@ export default {
       } else {
         this.isFinally = true;
       }
-
-      //   console.log(values.健康状况);
-      // for (var i in values) {
-      //   console.log(values[i]);
-      //   if (values[i] == "") {
-      //     //   console.log("曾用名为空");
-      //     Toast("表单未填写完整");
-      //     break;
-      //   }
-      // }
-      //   console.log("submit", values);
     },
     submit() {
       sessionStorage.setItem("FamilyMembers", true);
       this.$router.push({
-        path: "/SubmitSuccess",
+        path: "/submitSuccess",
       });
       console.log(111);
     },
@@ -590,11 +588,11 @@ export default {
   background: #ffffff;
   align-items: center;
 }
-.goback-box {
+.goback_box {
   width: 20%;
   padding-top: 26px;
 }
-.block1-w-box {
+.block1_w_box {
   width: 60%;
   text-align: center;
   padding-top: 26px;
@@ -604,7 +602,7 @@ export default {
   width: 10px;
   height: 18px;
 }
-.block1-w {
+.block1_w {
   font-size: 17px;
   font-weight: 500;
 }
@@ -650,19 +648,17 @@ export default {
   border-radius: 2px;
 }
 .error {
-  width: 375px;
-  height: 30px;
+  padding: 5px 15px;
   background: #fceded;
   opacity: 1;
   align-items: center;
 }
 .error_voice {
-  margin-left: 15px;
+  margin-right: 10px;
   width: 10px;
   height: 9px;
 }
 .error_w {
-  margin-left: 8px;
   font-size: 12px;
   color: #e63535;
 }

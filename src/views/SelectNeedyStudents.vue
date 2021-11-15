@@ -3,19 +3,19 @@
     <div class="block1_box">
       <!-- <img style="width: 375px" src="../img/bj2.png" alt="" /> -->
       <div class="title flex-row">
-        <div class="title-goback">
+        <div class="title_goback">
           <img class="goback" src="../img/goback1.png" alt="" @click="goback" />
         </div>
-        <div class="title-w-box">
-          <span class="title-w">贫困生</span>
+        <div class="title_w_box">
+          <span class="title_w">贫困生</span>
         </div>
       </div>
-      <div class="block1-body">
-        <div class="block1-w flex-col">
-          <span class="block1-w1">请确定</span>
-          <span class="block1-w2">是否为贫困生</span>
-          <div class="block1-w3"></div>
-          <span class="block1-w4">*请核对后再选择*</span>
+      <div class="block1_body">
+        <div class="block1_w flex-col">
+          <span class="block1_w1">请确定</span>
+          <span class="block1_w2">是否为贫困生</span>
+          <div class="block1_w3"></div>
+          <span class="block1_w4">*请核对后再选择*</span>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
         @change="onChange"
       />
       <div class="form4">
-        <van-button class="form4-btn" @click="gonext">确定</van-button>
+        <van-button class="form4_btn" @click="gonext">确定</van-button>
       </div>
     </div>
   </div>
@@ -46,7 +46,9 @@ export default {
   mounted() {},
   methods: {
     goback() {
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/",
+      });
     },
     onChange(picker, value, index) {
       this.num = index + 1;
@@ -61,7 +63,7 @@ export default {
         });
       } else {
         this.$router.push({
-          path: "/NeedyStudents",
+          path: "/needyStudents",
         });
       }
     },
@@ -84,7 +86,7 @@ export default {
   margin-top: 50px;
   width: 100%;
 }
-.title-goback {
+.title_goback {
   width: 20%;
 }
 .goback {
@@ -92,42 +94,42 @@ export default {
   width: 10px;
   height: 18px;
 }
-.title-w-box {
+.title_w_box {
   width: 60%;
   text-align: center;
 }
-.title-w {
+.title_w {
   font-size: 17px;
   font-weight: 500;
   color: #ffffff;
 }
-.block1-body {
+.block1_body {
   width: 100%;
   height: 195px;
   background: url(../img/bj2.png);
   background-size: contain;
   background-repeat: no-repeat;
 }
-.block1-w {
+.block1_w {
   margin-left: 25px;
 }
-.block1-w1 {
+.block1_w1 {
   margin-top: 26px;
   font-size: 14px;
   color: #ffffff;
 }
-.block1-w2 {
+.block1_w2 {
   margin-top: 6px;
   font-size: 16px;
   color: #ffffff;
 }
-.block1-w3 {
+.block1_w3 {
   margin-top: 12px;
   width: 16px;
   height: 0px;
   border-top: 1px solid #ffffff;
 }
-.block1-w4 {
+.block1_w4 {
   margin-top: 12px;
   font-size: 12px;
   color: #b7fffa;
@@ -150,7 +152,7 @@ export default {
   align-items: center;
   border-radius: 0px 0px 10px 10px;
 }
-.form4-btn {
+.form4_btn {
   width: 255px;
   height: 45px;
   background: linear-gradient(90deg, #4c95da 0%, #4fc9c0 100%);

@@ -7,52 +7,82 @@ const routes = [
   {
     path: '/',
     name: "index",
-    component: () => import('@/views/index.vue')
+    component: () => import('@/views/index.vue'),
+    meta: {
+      title: '首页', content: 'disable'
+    }
   },
   {
-    path: '/BasicInformation',
-    name: "BasicInformation",
-    component: () => import('@/views/BasicInformation.vue')
+    path: '/basicInformation',
+    name: "basicInformation",
+    component: () => import('@/views/basicInformation.vue'),
+    meta: {
+      title: '基础信息', content: 'disable-no'
+    }
   },
   {
-    path: '/PersonalContactInformation',
-    name: "PersonalContactInformation",
-    component: () => import('@/views/PersonalContactInformation.vue')
+    path: '/personalContactInformation',
+    name: "personalContactInformation",
+    component: () => import('@/views/personalContactInformation.vue'),
+    meta: {
+      title: '个人联系信息', content: 'disable-no'
+    }
   },
   {
-    path: '/CurriculumVitae',
-    name: "CurriculumVitae",
-    component: () => import('@/views/CurriculumVitae.vue')
+    path: '/curriculumVitae',
+    name: "curriculumVitae",
+    component: () => import('@/views/curriculumVitae.vue'),
+    meta: {
+      title: '个人简历', content: 'disable-no'
+    }
   },
   {
-    path: '/BasicFamilyInformation',
-    name: "BasicFamilyInformation",
-    component: () => import('@/views/BasicFamilyInformation.vue')
+    path: '/basicFamilyInformation',
+    name: "basicFamilyInformation",
+    component: () => import('@/views/basicFamilyInformation.vue'),
+    meta: {
+      title: '家庭基础信息', content: 'disable-no'
+    }
   },
   {
-    path: '/SelectFamilyNum',
-    name: "SelectFamilyNum",
-    component: () => import('@/views/SelectFamilyNum.vue')
+    path: '/selectFamilyNum',
+    name: "selectFamilyNum",
+    component: () => import('@/views/selectFamilyNum.vue'),
+    meta: {
+      title: '选择家庭成员人数', content: 'disable-no'
+    }
   },
   {
-    path: '/FamilyMembers',
-    name: "FamilyMembers",
-    component: () => import('@/views/FamilyMembers.vue')
+    path: '/familyMembers',
+    name: "familyMembers",
+    component: () => import('@/views/familyMembers.vue'),
+    meta: {
+      title: '家庭成员', content: 'disable-no'
+    }
   },
   {
-    path: '/SelectNeedyStudents',
-    name: "SelectNeedyStudents",
-    component: () => import('@/views/SelectNeedyStudents.vue')
+    path: '/selectNeedyStudents',
+    name: "selectNeedyStudents",
+    component: () => import('@/views/selectNeedyStudents.vue'),
+    meta: {
+      title: '首页', content: 'disable-no'
+    }
   },
   {
-    path: '/NeedyStudents',
-    name: "NeedyStudents",
-    component: () => import('@/views/NeedyStudents.vue')
+    path: '/needyStudents',
+    name: "needyStudents",
+    component: () => import('@/views/needyStudents.vue'),
+    meta: {
+      title: '是否贫困生', content: 'disable-no'
+    }
   },
   {
-    path: '/SubmitSuccess',
-    name: "SubmitSuccess",
-    component: () => import('@/views/SubmitSuccess.vue')
+    path: '/submitSuccess',
+    name: "submitSuccess",
+    component: () => import('@/views/submitSuccess.vue'),
+    meta: {
+      title: '提交成功', content: 'disable-no'
+    }
   },
 ]
 

@@ -1,11 +1,11 @@
 <template>
   <div class="content">
     <div class="block1 flex-row">
-      <div class="goback-box">
+      <div class="goback_box">
         <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
-      <div class="block1-w-box">
-        <span class="block1-w">个人联系信息</span>
+      <div class="block1_w_box">
+        <span class="block1_w">个人联系信息</span>
       </div>
     </div>
     <div class="block2 flex-col">
@@ -60,11 +60,11 @@ export default {
   background: #ffffff;
   align-items: center;
 }
-.goback-box {
+.goback_box {
   width: 20%;
   padding-top: 26px;
 }
-.block1-w-box {
+.block1_w_box {
   width: 60%;
   text-align: center;
   padding-top: 26px;
@@ -74,7 +74,7 @@ export default {
   width: 10px;
   height: 18px;
 }
-.block1-w {
+.block1_w {
   font-size: 17px;
   font-weight: 500;
 }

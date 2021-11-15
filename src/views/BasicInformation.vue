@@ -1,20 +1,16 @@
 <template>
   <div class="content">
-    <div class="block1 flex-row">
-      <div class="goback-box">
-        <img class="goback" src="../img/goback.png" alt="" @click="goback" />
-      </div>
-      <div class="block1-w-box">
-        <span class="block1-w" @click="showArr">基础信息</span>
-      </div>
-    </div>
-    <div class="form-box">
-      <van-form @submit="onSubmit">
-        <div class="form1-box">
+    <div class="form_box">
+      <van-form
+        @submit="onSubmit"
+        error-message-align="right"
+        @scrollToField="scrollToField"
+      >
+        <div class="form1_box">
           <div class="form1">
             <!-- 曾用名 -->
             <van-field
-              v-model="formerlyName"
+              v-model="info.formerlyName"
               name="曾用名"
               label="曾用名"
               placeholder="没有填'无'"
@@ -26,12 +22,18 @@
               readonly
               clickable
               name="国籍"
-              :value="valueNationality"
+              :value="info.valueNationality"
               label="国籍"
-              placeholder="选择国籍 >"
+              :placeholder="'选择国籍'"
+              right-icon="arrow"
               @click="showNationality = true"
               input-align="right"
-              :rules="[{ required: true, message: '请选择国籍' }]"
+              :rules="[
+                {
+                  required: true,
+                  message: '请选择国籍',
+                },
+              ]"
             />
             <van-popup v-model="showNationality" position="bottom">
               <van-picker
@@ -46,9 +48,10 @@
               readonly
               clickable
               name="出生地"
-              :value="valueBirth"
+              :value="info.valueBirth"
               label="出生地"
-              placeholder="选择省市区 >"
+              placeholder="选择省市区"
+              right-icon="arrow"
               @click="showArea = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择出生地' }]"
@@ -65,9 +68,10 @@
               readonly
               clickable
               name="民族"
-              :value="valueNation"
+              :value="info.valueNation"
               label="民族"
-              placeholder="选择民族 >"
+              placeholder="选择民族"
+              right-icon="arrow"
               @click="showNation = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择民族' }]"
@@ -85,9 +89,10 @@
               readonly
               clickable
               name="宗教"
-              :value="valueReligion"
+              :value="info.valueReligion"
               label="宗教"
-              placeholder="选择宗教 >"
+              placeholder="选择宗教"
+              right-icon="arrow"
               @click="showReligion = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择宗教' }]"
@@ -105,9 +110,10 @@
               readonly
               clickable
               name="政治面貌"
-              :value="valuePolitics"
+              :value="info.valuePolitics"
               label="政治面貌"
-              placeholder="选择政治面貌 >"
+              placeholder="选择政治面貌"
+              right-icon="arrow"
               @click="showPolitics = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择政治面貌' }]"
@@ -126,9 +132,10 @@
               readonly
               clickable
               name="入党时间"
-              :value="valueJoinTime"
+              :value="info.valueJoinTime"
               label="入党时间"
-              placeholder="选择时间 >"
+              placeholder="选择时间"
+              right-icon="arrow"
               @click="showCalendar = true"
               input-align="right"
             />
@@ -141,32 +148,23 @@
             <!-- 介绍人 -->
             <van-field
               v-if="isshowdy"
-              readonly
               clickable
               name="介绍人"
-              :value="valueReligionP"
+              v-model="info.valueReligionP"
               label="介绍人"
-              placeholder="选择宗教 >"
-              @click="showReligionp = true"
+              placeholder="介绍人姓名"
               input-align="right"
-              :rules="[{ required: true, message: '请选择宗教' }]"
+              :rules="[{ required: true, message: '请填写介绍人姓名' }]"
             />
-            <van-popup v-model="showReligionp" position="bottom">
-              <van-picker
-                show-toolbar
-                :columns="Religion"
-                @confirm="onReligionp"
-                @cancel="showReligionp = false"
-              />
-            </van-popup>
             <!-- 籍贯 -->
             <van-field
               readonly
               clickable
               name="籍贯"
-              :value="valueNativeplace"
+              :value="info.valueNativeplace"
               label="籍贯"
-              placeholder="选择籍贯 >"
+              placeholder="选择籍贯"
+              right-icon="arrow"
               @click="showArea1 = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择籍贯' }]"
@@ -183,9 +181,10 @@
               readonly
               clickable
               name="户口所在地"
-              :value="valueResidence"
+              :value="info.valueResidence"
               label="户口所在地"
-              placeholder="选择户口所在地 >"
+              placeholder="选择户口所在地"
+              right-icon="arrow"
               @click="showArea2 = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择户口所在地' }]"
@@ -200,7 +199,7 @@
             <!-- 户口性质 -->
             <div class="hkxz flex-row">
               <div
-                :class="item.checked ? 'hkxz-box-t' : 'hkxz-box-f'"
+                :class="item.checked ? 'hkxz_box_t' : 'hkxz_box_f'"
                 v-for="(item, index) in arr"
                 :key="index"
                 @click="changehkxz(item, index)"
@@ -212,7 +211,7 @@
               readonly
               clickable
               name="户口性质"
-              :value="valueResidencexz"
+              :value="info.valueResidencexz"
               label="户口性质"
               placeholder=""
               input-align="right"
@@ -224,9 +223,10 @@
               readonly
               clickable
               name="生源地"
-              :value="valueStudents"
+              :value="info.valueStudents"
               label="生源地"
-              placeholder="选择生源地 >"
+              placeholder="选择生源地"
+              right-icon="arrow"
               @click="showArea3 = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择生源地' }]"
@@ -240,16 +240,17 @@
             </van-popup>
           </div>
         </div>
-        <div class="form2-box">
+        <div class="form2_box">
           <div class="form2">
             <!-- 健康状况 -->
             <van-field
               readonly
               clickable
               name="健康状况"
-              :value="valueHealthy"
+              :value="info.valueHealthy"
               label="健康状况"
-              placeholder="选择健康状况 >"
+              placeholder="选择健康状况"
+              right-icon="arrow"
               @click="showHealthy = true"
               input-align="right"
               :rules="[{ required: true, message: '请选择健康状况' }]"
@@ -265,7 +266,7 @@
             <!-- 血型 -->
             <div class="xx flex-row">
               <div
-                :class="item.checked ? 'xx-box-t' : 'xx-box-f'"
+                :class="item.checked ? 'xx_box_t' : 'xx_box_f'"
                 v-for="(item, index) in blood"
                 :key="index"
                 @click="changexx(item, index)"
@@ -277,7 +278,7 @@
               readonly
               clickable
               name="血型"
-              :value="valueblood"
+              :value="info.valueblood"
               label="血型"
               placeholder=""
               input-align="right"
@@ -285,7 +286,7 @@
             />
             <!-- 农行卡号 -->
             <van-field
-              v-model="bankNum"
+              v-model="info.bankNum"
               name="农行账户"
               label="农行账户"
               placeholder="填写银行卡号"
@@ -301,12 +302,12 @@
           </div>
         </div>
 
-        <div class="form3-box">
+        <div class="form3_box">
           <div class="form3">
             <van-field
               name="一寸照"
               label="照片用于学生登记表，请上传本人正面、免冠、一寸照片一张！"
-              class="form3-1"
+              class="form3_1"
               :rules="[{ required: true, message: '请上传图片' }]"
             >
               <template #input>
@@ -339,23 +340,82 @@ export default {
       minDate: new Date(2010, 0, 1),
       maxDate: new Date(2021, 12, 31),
       isshowdy: false,
-      formerlyName: "",
-      valueNationality: "", //国籍值
-      valueBirth: "", //出生地值
-      valueNation: "", //民族值
-      valueReligion: "", //宗教值
-      valuePolitics: "", //政治面貌值
-      valueJoinTime: "", //入党时间值
-      valueReligionP: "", //介绍人宗教值
-      valueNativeplace: "", //籍贯值
-      valueResidence: "", //户口所在地值
-      valueResidencexz: "", //户口性质值
-      valueStudents: "", //生源地值
-      valueHealthy: "", //健康状况值
-      valueblood: "", //血型值
-      bankNum: "", //银行卡号
+      info: {
+        formerlyName: "", //曾用名
+        valueNationality: "", //国籍值
+        valueBirth: "", //出生地值
+        valueNation: "", //民族值
+        valueReligion: "", //宗教值
+        valuePolitics: "", //政治面貌值
+        valueJoinTime: "", //入党时间值
+        valueReligionP: "", //介绍人宗教值
+        valueNativeplace: "", //籍贯值
+        valueResidence: "", //户口所在地值
+        valueResidencexz: "", //户口性质值
+        valueStudents: "", //生源地值
+        valueHealthy: "", //健康状况值
+        valueblood: "", //血型值
+        bankNum: "", //银行卡号
+      },
       nationality: ["中国", "外国"], //国籍选择器值
-      nation: ["汉族", "少数民族"], //民族选择器值
+      nation: [
+        "汉族",
+        "壮族",
+        "满族",
+        "回族",
+        "苗族",
+        "维吾尔族",
+        "土家族",
+        "彝族",
+        "蒙古族",
+        "藏族",
+        "布依族",
+        "侗族",
+        "瑶族",
+        "朝鲜族",
+        "白族",
+        "哈尼族",
+        "哈萨克族",
+        "黎族",
+        "傣族",
+        "畲族",
+        "傈僳族",
+        "仡佬族",
+        "东乡族",
+        "高山族",
+        "拉祜族",
+        "水族",
+        "佤族",
+        "纳西族",
+        "羌族",
+        "土族",
+        "仫佬族",
+        "锡伯族",
+        "柯尔克孜族",
+        "达斡尔族",
+        "景颇族",
+        "毛南族",
+        "撒拉族",
+        "布朗族",
+        "塔吉克族",
+        "阿昌族",
+        "普米族",
+        "鄂温克族",
+        "怒族",
+        "京族",
+        "基诺族",
+        "德昂族",
+        "保安族",
+        "俄罗斯族",
+        "裕固族",
+        "乌孜别克族",
+        "门巴族",
+        "鄂伦春族",
+        "独龙族",
+        "塔塔尔族",
+        "赫哲族",
+        "珞巴族",
+      ], //民族选择器值
       Religion: ["佛教", "道教", "其他宗教"], //宗教选择器值
       Politics: ["党员", "团员", "群众"], //政治面貌选择器值
       Healthy: ["健康", "亚健康", "危险"], //健康状况选择器值
@@ -364,7 +424,6 @@ export default {
       showReligion: false, //宗教框显示
       showPolitics: false, //政治面貌框显示
       showCalendar: false, //入党时间框显示
-      showReligionp: false, //推荐人宗教显示
       showHealthy: false, //健康状况显示
       showArea: false, //出生地框显示
       showArea1: false, //籍贯框显示
@@ -412,20 +471,25 @@ export default {
   },
   mounted() {},
   methods: {
+    scrollToField(value) {
+      console.log(value);
+    },
     goback() {
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/",
+      });
     },
     showArr() {
       console.log(sessionStorage.getItem("testKey"));
     },
     onNationality(value) {
       //国籍
-      this.valueNationality = value;
+      this.info.valueNationality = value;
       this.showNationality = false;
     },
     onBirth(values) {
       //出生地
-      this.valueBirth = values
+      this.info.valueBirth = values
         .filter((item) => !!item)
         .map((item) => item.name)
         .join("/");
@@ -433,19 +497,19 @@ export default {
     },
     onNation(value) {
       //民族
-      this.valueNation = value;
+      this.info.valueNation = value;
       this.showNation = false;
     },
     onReligion(value) {
       //宗教
-      this.valueReligion = value;
+      this.info.valueReligion = value;
       this.showReligion = false;
     },
     onPolitics(value) {
       //政治面貌
-      this.valuePolitics = value;
+      this.info.valuePolitics = value;
       this.showPolitics = false;
-      if (this.valuePolitics == "党员") {
+      if (this.info.valuePolitics == "党员") {
         this.isshowdy = true;
       } else {
         this.isshowdy = false;
@@ -454,19 +518,14 @@ export default {
     onConfirm(date) {
       //入党时间
       console.log(date);
-      this.valueJoinTime = `${date.getFullYear()}-${
+      this.info.valueJoinTime = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
       this.showCalendar = false;
     },
-    onReligionp(value) {
-      //推荐人宗教
-      this.valueReligionP = value;
-      this.showReligionp = false;
-    },
     onNativeplace(values) {
       //籍贯
-      this.valueNativeplace = values
+      this.info.valueNativeplace = values
         .filter((item) => !!item)
         .map((item) => item.name)
         .join("/");
@@ -474,7 +533,7 @@ export default {
     },
     onResidence(values) {
       //户口所在地
-      this.valueResidence = values
+      this.info.valueResidence = values
         .filter((item) => !!item)
         .map((item) => item.name)
         .join("/");
@@ -485,7 +544,7 @@ export default {
       for (var i in this.arr) {
         if (i == index) {
           this.arr[i].checked = true;
-          this.valueResidencexz = item.name;
+          this.info.valueResidencexz = item.name;
         } else {
           this.arr[i].checked = false;
         }
@@ -493,7 +552,7 @@ export default {
     },
     onStudents(values) {
       //生源地
-      this.valueStudents = values
+      this.info.valueStudents = values
         .filter((item) => !!item)
         .map((item) => item.name)
         .join("/");
@@ -501,7 +560,7 @@ export default {
     },
     onHealthy(value) {
       //健康状况
-      this.valueHealthy = value;
+      this.info.valueHealthy = value;
       this.showHealthy = false;
     },
     changexx(item, index) {
@@ -509,7 +568,7 @@ export default {
       for (var i in this.blood) {
         if (i == index) {
           this.blood[i].checked = true;
-          this.valueblood = item.name;
+          this.info.valueblood = item.name;
         } else {
           this.blood[i].checked = false;
         }
@@ -528,7 +587,7 @@ export default {
         }
       }
       this.$router.push({
-        path: "/SubmitSuccess",
+        path: "/submitSuccess",
       });
     },
   },
@@ -536,32 +595,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/common.css";
-.block1 {
-  width: 100%;
-  height: 90px;
-  background: #ffffff;
-  align-items: center;
-}
-.goback-box {
-  width: 20%;
-  padding-top: 26px;
-}
-.block1-w-box {
-  width: 60%;
-  text-align: center;
-  padding-top: 26px;
-}
-.goback {
-  margin-left: 16px;
-  width: 10px;
-  height: 18px;
-}
-.block1-w {
-  font-size: 17px;
-  font-weight: 500;
-}
-.form1-box {
+.form1_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;
@@ -581,7 +615,7 @@ export default {
   left: 94px;
   font-size: 14px;
 }
-.hkxz-box-f {
+.hkxz_box_f {
   margin-right: 10px;
   width: 68px;
   height: 28px;
@@ -592,7 +626,7 @@ export default {
   line-height: 30px;
   color: #4c96d9;
 }
-.hkxz-box-t {
+.hkxz_box_t {
   margin-right: 10px;
   width: 70px;
   height: 30px;
@@ -603,7 +637,7 @@ export default {
   color: #ffffff;
 }
 
-.form2-box {
+.form2_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;
@@ -623,7 +657,7 @@ export default {
   left: 74px;
   font-size: 14px;
 }
-.xx-box-f {
+.xx_box_f {
   margin-right: 10px;
   width: 43px;
   height: 28px;
@@ -634,7 +668,7 @@ export default {
   line-height: 30px;
   color: #4c96d9;
 }
-.xx-box-t {
+.xx_box_t {
   margin-right: 10px;
   width: 45px;
   height: 30px;
@@ -645,7 +679,7 @@ export default {
   color: #ffffff;
 }
 
-.form3-box {
+.form3_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;
@@ -656,7 +690,7 @@ export default {
   width: 96%;
   margin-left: 2%;
 }
-.form3-1 {
+.form3_1 {
   display: flex;
   flex-direction: column;
   font-size: 15px;
@@ -734,5 +768,8 @@ export default {
 ::v-deep .van-cell {
   font-size: 15px;
   padding: 16px 16px;
+}
+::v-deep .van-field__right-icon {
+  color: #c8c8c8;
 }
 </style>

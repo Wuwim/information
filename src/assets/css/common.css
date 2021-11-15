@@ -13,7 +13,7 @@ body {
   display: flex;
 }
 
-.form-box {
+.form_box {
   flex: 1;
   overflow-y: scroll;
 }
@@ -26,4 +26,8 @@ body {
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.flex_1 {
+  flex: 1;
 }

@@ -1,22 +1,22 @@
 <template>
   <div class="content">
     <div class="block1 flex-row">
-      <div class="goback-box">
+      <div class="goback_box">
         <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
-      <div class="block1-w-box">
-        <span class="block1-w">贫困生</span>
+      <div class="block1_w_box">
+        <span class="block1_w">贫困生</span>
       </div>
     </div>
 
     <div class="error flex-row">
       <img class="error_voice" src="../img/voice1.png" alt="" />
-      <span class="error_w">其中一项或一项以上必须选是，才能提交！</span>
+      <span class="error_w flex_1">其中一项或一项以上必须选是，才能提交！</span>
     </div>
-    <div class="form-box">
+    <div class="form_box">
       <!-- @submit="checkForm" -->
       <!-- <form action=""> -->
-      <div class="form1-box">
+      <div class="form1_box">
         <!-- :class=" ? 'form1' : ''" -->
         <div v-for="(item, index) in arr" :key="index">
           <!-- 性别 -->
@@ -128,7 +128,9 @@ export default {
   mounted() {},
   methods: {
     goback() {
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/index",
+      });
     },
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
@@ -156,7 +158,7 @@ export default {
       sessionStorage.setItem("NeedyStudents", true);
 
       this.$router.push({
-        path: "/SubmitSuccess",
+        path: "/submitSuccess",
       });
     },
   },
@@ -171,11 +173,11 @@ export default {
   background: #ffffff;
   align-items: center;
 }
-.goback-box {
+.goback_box {
   width: 20%;
   padding-top: 26px;
 }
-.block1-w-box {
+.block1_w_box {
   width: 60%;
   text-align: center;
   padding-top: 26px;
@@ -185,7 +187,7 @@ export default {
   width: 10px;
   height: 18px;
 }
-.block1-w {
+.block1_w {
   font-size: 17px;
   font-weight: 500;
 }
@@ -231,26 +233,24 @@ export default {
   border-radius: 2px;
 }
 .error {
-  width: 375px;
-  height: 30px;
-  background: #dcf2f0;
+  padding: 5px 15px;
+background: #DCF2F0;
   opacity: 1;
   align-items: center;
 }
 .error_voice {
-  margin-left: 15px;
+  margin-right: 10px;
   width: 10px;
   height: 9px;
 }
 .error_w {
-  margin-left: 8px;
   font-size: 12px;
-  color: #50c9c3;
+  color: #50C9C3;
 }
 .error_color {
   background: #fceded;
 }
-.form1-box {
+.form1_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;

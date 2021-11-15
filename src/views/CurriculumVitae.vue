@@ -1,18 +1,18 @@
 <template>
   <div class="content">
     <div class="block1 flex-row">
-      <div class="goback-box">
+      <div class="goback_box">
         <img class="goback" @click="goback" src="../img/goback.png" alt="" />
       </div>
-      <div class="block1-w-box">
-        <span class="block1-w">个人简历</span>
+      <div class="block1_w_box">
+        <span class="block1_w">个人简历</span>
       </div>
     </div>
-    <div class="form-box">
-      <van-form @submit="onSubmit">
-        <div class="form1-box">
+    <div class="form_box">
+      <van-form @submit="onSubmit" error-message-align="right">
+        <div class="form1_box">
           <div class="form1">
-            <div class="form1-title">小学</div>
+            <div class="form1_title">小学</div>
             <!-- 就读学校 -->
             <van-field
               v-model="primarySchool"
@@ -59,7 +59,7 @@
               @confirm="changePsEt"
             />
             <!-- 担任职务 -->
-            <div class="block-title">担任职务</div>
+            <div class="block_title">担任职务</div>
             <van-field
               v-model="primarySchoolJob"
               name="小学担任职务"
@@ -77,7 +77,7 @@
               :rules="[{ required: true, message: '请填写证明人姓名' }]"
             />
             <!-- 小学奖励 -->
-            <div class="block-title">何时何处何原因受过何种奖励</div>
+            <div class="block_title">何时何处何原因受过何种奖励</div>
             <van-field
               v-model="primarySchoolReward"
               name="小学奖励"
@@ -86,7 +86,7 @@
               autosize
             />
             <!-- 小学处分 -->
-            <div class="block-title">何时何处何原因受过何种处分</div>
+            <div class="block_title">何时何处何原因受过何种处分</div>
             <van-field
               v-model="primarySchoolPunishment"
               name="小学处分"
@@ -96,9 +96,9 @@
             />
           </div>
         </div>
-        <div class="form1-box">
+        <div class="form1_box">
           <div class="form1">
-            <div class="form1-title">初中</div>
+            <div class="form1_title">初中</div>
             <!-- 就读学校 -->
             <van-field
               v-model="juniorMiddleSchool"
@@ -145,7 +145,7 @@
               @confirm="changeJmsEt"
             />
             <!-- 担任职务 -->
-            <div class="block-title">担任职务</div>
+            <div class="block_title">担任职务</div>
             <van-field
               v-model="juniorMiddleSchoolJob"
               name="初中担任职务"
@@ -163,7 +163,7 @@
               :rules="[{ required: true, message: '请填写证明人姓名' }]"
             />
             <!-- 初中奖励 -->
-            <div class="block-title">何时何处何原因受过何种奖励</div>
+            <div class="block_title">何时何处何原因受过何种奖励</div>
             <van-field
               v-model="juniorMiddleSchoolReward"
               name="初中奖励"
@@ -172,7 +172,7 @@
               autosize
             />
             <!-- 初中处分 -->
-            <div class="block-title">何时何处何原因受过何种处分</div>
+            <div class="block_title">何时何处何原因受过何种处分</div>
             <van-field
               v-model="juniorMiddleSchoolPunishment"
               name="初中处分"
@@ -182,9 +182,9 @@
             />
           </div>
         </div>
-        <div class="form1-box">
+        <div class="form1_box">
           <div class="form1">
-            <div class="form1-title">高中</div>
+            <div class="form1_title">高中</div>
             <!-- 就读学校 -->
             <van-field
               v-model="highSchool"
@@ -231,7 +231,7 @@
               @confirm="changeHsEt"
             />
             <!-- 担任职务 -->
-            <div class="block-title">担任职务</div>
+            <div class="block_title">担任职务</div>
             <van-field
               v-model="highSchoolJob"
               name="高中担任职务"
@@ -249,7 +249,7 @@
               :rules="[{ required: true, message: '请填写证明人姓名' }]"
             />
             <!-- 高中奖励 -->
-            <div class="block-title">何时何处何原因受过何种奖励</div>
+            <div class="block_title">何时何处何原因受过何种奖励</div>
             <van-field
               v-model="highSchoolReward"
               name="高中奖励"
@@ -258,7 +258,7 @@
               autosize
             />
             <!-- 高中处分 -->
-            <div class="block-title">何时何处何原因受过何种处分</div>
+            <div class="block_title">何时何处何原因受过何种处分</div>
             <van-field
               v-model="highSchoolPunishment"
               name="高中处分"
@@ -269,7 +269,7 @@
           </div>
         </div>
         <div class="form4">
-          <van-button class="form4-btn" round block native-type="submit"
+          <van-button class="form4_btn" round block native-type="submit"
             >提交</van-button
           >
         </div>
@@ -317,7 +317,9 @@ export default {
   methods: {
     goback() {
       //返回上一级
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/",
+      });
     },
     changePsSt(date) {
       //小学入学时间
@@ -371,7 +373,7 @@ export default {
     onSubmit(values) {
       sessionStorage.setItem("CurriculumVitae", true);
       this.$router.push({
-        path: "/SubmitSuccess",
+        path: "/submitSuccess",
       });
       console.log(values);
       //   console.log(values.健康状况);
@@ -397,11 +399,11 @@ export default {
   background: #ffffff;
   align-items: center;
 }
-.goback-box {
+.goback_box {
   width: 20%;
   padding-top: 26px;
 }
-.block1-w-box {
+.block1_w_box {
   width: 60%;
   text-align: center;
   padding-top: 26px;
@@ -411,11 +413,11 @@ export default {
   width: 10px;
   height: 18px;
 }
-.block1-w {
+.block1_w {
   font-size: 17px;
   font-weight: 500;
 }
-.form1-box {
+.form1_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;
@@ -428,7 +430,7 @@ export default {
   border-radius: 8px;
   padding-bottom: 8px;
 }
-.form1-title {
+.form1_title {
   width: 345px;
   height: 42px;
   background: linear-gradient(180deg, #4c97d9 0%, #4cbfb8 100%);
@@ -439,7 +441,7 @@ export default {
   color: #ffffff;
   line-height: 42px;
 }
-.block-title {
+.block_title {
   margin-top: 10px;
   margin-left: 16px;
   font-size: 15px;
@@ -460,7 +462,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.form4-btn {
+.form4_btn {
   width: 345px;
   height: 45px;
   background: linear-gradient(90deg, #4c95da 0%, #4fc9c0 100%);

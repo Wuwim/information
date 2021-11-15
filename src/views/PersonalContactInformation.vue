@@ -1,16 +1,16 @@
 <template>
   <div class="content">
     <div class="block1 flex-row">
-      <div class="goback-box">
+      <div class="goback_box">
         <img class="goback" src="../img/goback.png" alt="" @click="goback" />
       </div>
-      <div class="block1-w-box">
-        <span class="block1-w">个人联系信息</span>
+      <div class="block1_w_box">
+        <span class="block1_w">个人联系信息</span>
       </div>
     </div>
-    <div class="form-box">
-      <van-form @submit="onSubmit">
-        <div class="form1-box">
+    <div class="form_box">
+      <van-form @submit="onSubmit" error-message-align="right">
+        <div class="form1_box">
           <div class="form1">
             <!-- 注册钉钉的手机号 -->
             <van-field
@@ -75,13 +75,7 @@
               label="微信号"
               placeholder="填写你的微信号"
               input-align="right"
-              :rules="[
-                { required: true, message: '请填写微信号' },
-                {
-                  pattern: /^[a-zA-Z][a-zA-Z\d_-]{5,19}$/,
-                  message: '请填写正确的微信号',
-                },
-              ]"
+              :rules="[{ required: true, message: '请填写微信号' }]"
             />
             <!-- 通讯地址 -->
             <van-field
@@ -135,7 +129,7 @@
           </div>
         </div>
         <div class="form4">
-          <van-button class="form4-btn" round block native-type="submit"
+          <van-button class="form4_btn" round block native-type="submit"
             >提交</van-button
           >
         </div>
@@ -168,7 +162,9 @@ export default {
   mounted() {},
   methods: {
     goback() {
-      this.$router.go(-1);
+      this.$router.push({
+        path: "/",
+      });
     },
     onpostalAddress(values) {
       //出生地
@@ -200,7 +196,7 @@ export default {
       // }
       console.log("submit", values);
       this.$router.push({
-        path: "/SubmitSuccess",
+        path: "/submitSuccess",
       });
     },
   },
@@ -215,11 +211,11 @@ export default {
   background: #ffffff;
   align-items: center;
 }
-.goback-box {
+.goback_box {
   width: 20%;
   padding-top: 26px;
 }
-.block1-w-box {
+.block1_w_box {
   width: 60%;
   text-align: center;
   padding-top: 26px;
@@ -229,11 +225,11 @@ export default {
   width: 10px;
   height: 18px;
 }
-.block1-w {
+.block1_w {
   font-size: 17px;
   font-weight: 500;
 }
-.form1-box {
+.form1_box {
   margin: 15px auto 0;
   width: 345px;
   background: #ffffff;
@@ -292,7 +288,7 @@ textarea[class="postalAddress"]::-webkit-input-placeholder {
   justify-content: center;
   align-items: center;
 }
-.form4-btn {
+.form4_btn {
   width: 345px;
   height: 45px;
   background: linear-gradient(90deg, #4c95da 0%, #4fc9c0 100%);

@@ -2,31 +2,26 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import { Form } from 'vant';
-import { Field } from 'vant';
-import { Picker } from 'vant';
-import { Popup } from 'vant';
-import { Calendar } from 'vant';
-import { Uploader } from 'vant';
-import { Button } from 'vant';
-import { Area } from 'vant';
-import { DatetimePicker } from 'vant';
-
-
-Vue.use(Form);
-Vue.use(Field);
-Vue.use(Picker);
-Vue.use(Popup);
-Vue.use(Calendar);
-Vue.use(Uploader);
-Vue.use(Button);
-Vue.use(Area);
-Vue.use(DatetimePicker);
 import 'amfe-flexible';
+import './utils/vant.js'
 
-import VueDirectiveImagePreviewer from 'vue-directive-image-previewer'
-import 'vue-directive-image-previewer/dist/assets/style.css'
-Vue.use(VueDirectiveImagePreviewer)
+import "./assets/css/common.css";
+router.beforeEach((to, form, next) => {
+  // 路由发生变化修改页面meta
+  console.log(to)
+  if (to.meta.content) {
+    let head = document.getElementsByTagName('head');
+    let meta = document.createElement('meta');
+    meta.content = to.meta.content;
+    head[0].appendChild(meta)
+    // 路由发生变化修改页面title
+    if (to.meta.title) {
+      document.title = to.meta.title;
+    }
+    next()
+  }
+})
+
 
 
 Vue.config.productionTip = false
