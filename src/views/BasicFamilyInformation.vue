@@ -231,7 +231,11 @@ export default {
         this.isErrorjhr1 = false;
       }
 
-      sessionStorage.setItem("BasicFamilyInformation", true);
+      let data = JSON.parse(sessionStorage.getItem("data"));
+      console.log(data)
+      data.[3]=false;
+      console.log(data)
+      sessionStorage.setItem("data", JSON.stringify(data));
 
       this.$router.push({
         path: "/submitSuccess",

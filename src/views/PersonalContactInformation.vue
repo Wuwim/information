@@ -183,17 +183,12 @@ export default {
       }
     },
     onSubmit(values) {
-      sessionStorage.setItem("PersonalContactInformation", true);
-      //   console.log(values[0]);
-      //   console.log(values.健康状况);
-      // for (var i in values) {
-      //   console.log(values[i]);
-      //   if (values[i] == "") {
-      //     //   console.log("曾用名为空");
-      //     Toast("表单未填写完整");
-      //     break;
-      //   }
-      // }
+      
+      let data = JSON.parse(sessionStorage.getItem("data"));
+      console.log(data)
+      data.[1]=false;
+      console.log(data)
+      sessionStorage.setItem("data", JSON.stringify(data));
       console.log("submit", values);
       this.$router.push({
         path: "/submitSuccess",

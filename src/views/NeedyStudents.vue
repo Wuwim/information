@@ -154,9 +154,13 @@ export default {
             return;
           }
         }
-      }
-      sessionStorage.setItem("NeedyStudents", true);
-
+      } 
+      
+      let data = JSON.parse(sessionStorage.getItem("data"));
+      console.log(data)
+      data.[5]=false;
+      console.log(data)
+      sessionStorage.setItem("data", JSON.stringify(data));
       this.$router.push({
         path: "/submitSuccess",
       });
@@ -234,7 +238,7 @@ export default {
 }
 .error {
   padding: 5px 15px;
-background: #DCF2F0;
+  background: #dcf2f0;
   opacity: 1;
   align-items: center;
 }
@@ -245,7 +249,7 @@ background: #DCF2F0;
 }
 .error_w {
   font-size: 12px;
-  color: #50C9C3;
+  color: #50c9c3;
 }
 .error_color {
   background: #fceded;

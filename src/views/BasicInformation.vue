@@ -575,13 +575,14 @@ export default {
       }
     },
     onSubmit(values) {
-      sessionStorage.setItem("BasicInformation", true);
-      //   console.log(values[0]);
-      //   console.log(values.健康状况);
+      let data = JSON.parse(sessionStorage.getItem("data"));
+      console.log(data)
+      data.[0]=false;
+      console.log(data)
+      sessionStorage.setItem("data", JSON.stringify(data));
       for (var i in values) {
         console.log(values[i]);
         if (values[i] == "") {
-          //   console.log("曾用名为空");
           Toast("表单未填写完整");
           break;
         }

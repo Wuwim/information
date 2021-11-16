@@ -57,7 +57,11 @@ export default {
     },
     gonext() {
       if (this.num == 1) {
-        sessionStorage.setItem("NeedyStudents", true);
+        let data = JSON.parse(sessionStorage.getItem("data"));
+        console.log(data)
+        data.[5]=false;
+        console.log(data)
+        sessionStorage.setItem("data", JSON.stringify(data));
         this.$router.push({
           path: "/",
         });

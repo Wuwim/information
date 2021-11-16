@@ -29,130 +29,112 @@
     </div>
     <div class="block2 flex-row">
       <div class="block2_right flex-col">
-        <div
-          class="flex-row jbxx"
-          :class="arr[0] == 'false' ? '' : 'jbxx_true'"
-        >
+        <div class="flex-row jbxx" :class="arr[0] == true ? '' : 'jbxx_true'">
           <div class="flex-col flex_1">
             <span class="block2_right_w1">基础信息</span>
             <span class="block2_right_w2">Basic information</span>
           </div>
           <button
             class="block2_right_btn"
-            :class="this.arr[0] == 'false' ? '' : 'btywc'"
+            :class="arr[0] == true ? '' : 'btywc'"
             @click="goBasicInformation()"
           >
-            {{ this.arr[0] == "false" ? "填写" : "已完成" }}
+            {{ arr[0] == true ? "填写" : "已完成" }}
           </button>
         </div>
         <div class="dashed-box">
           <div
             class="dashed"
-            :class="arr[0] == 'false' ? '' : 'dashed_true'"
+            :class="arr[0] == true ? '' : 'dashed_true'"
           ></div>
         </div>
-        <div
-          class="flex-row jbxx"
-          :class="arr[1] == 'false' ? '' : 'jbxx_true'"
-        >
+        <div class="flex-row jbxx" :class="arr[1] == true ? '' : 'jbxx_true'">
           <div class="flex-col flex_1">
             <span class="block2_right_w1">个人联系信息</span>
             <span class="block2_right_w2">Personal contact information</span>
           </div>
           <button
             class="block2_right_btn"
-            :class="this.arr[1] == 'false' ? '' : 'btywc'"
+            :class="this.arr[1] == true ? '' : 'btywc'"
             @click="goPersonalContactInformation()"
           >
-            {{ this.arr[1] == "false" ? "填写" : "已完成" }}
+            {{ this.arr[1] == true ? "填写" : "已完成" }}
           </button>
         </div>
         <div class="dashed-box">
           <div
             class="dashed"
-            :class="arr[1] == 'false' ? '' : 'dashed_true'"
+            :class="arr[1] == true ? '' : 'dashed_true'"
           ></div>
         </div>
-        <div
-          class="flex-row jbxx"
-          :class="arr[2] == 'false' ? '' : 'jbxx_true'"
-        >
+        <div class="flex-row jbxx" :class="arr[2] == true ? '' : 'jbxx_true'">
           <div class="flex-col flex_1">
             <span class="block2_right_w1">个人简历</span>
             <span class="block2_right_w2">Curriculum vitae</span>
           </div>
           <button
             class="block2_right_btn"
-            :class="this.arr[2] == 'false' ? '' : 'btywc'"
+            :class="this.arr[2] == true ? '' : 'btywc'"
             @click="goCurriculumVitae()"
           >
-            {{ this.arr[2] == "false" ? "填写" : "已完成" }}
+            {{ this.arr[2] == true ? "填写" : "已完成" }}
           </button>
         </div>
         <div class="dashed-box">
           <div
             class="dashed"
-            :class="arr[2] == 'false' ? '' : 'dashed_true'"
+            :class="arr[2] == true ? '' : 'dashed_true'"
           ></div>
         </div>
-        <div
-          class="flex-row jbxx"
-          :class="arr[3] == 'false' ? '' : 'jbxx_true'"
-        >
+        <div class="flex-row jbxx" :class="arr[3] == true ? '' : 'jbxx_true'">
           <div class="flex-col flex_1">
             <span class="block2_right_w1">家庭基础信息</span>
             <span class="block2_right_w2">Family basic information</span>
           </div>
           <button
             class="block2_right_btn"
-            :class="this.arr[3] == 'false' ? '' : 'btywc'"
+            :class="this.arr[3] == true ? '' : 'btywc'"
             @click="goBasicFamilyInformation()"
           >
-            {{ this.arr[3] == "false" ? "填写" : "已完成" }}
+            {{ this.arr[3] == true ? "填写" : "已完成" }}
           </button>
         </div>
         <div class="dashed-box">
           <div
             class="dashed"
-            :class="arr[3] == 'false' ? '' : 'dashed_true'"
+            :class="arr[3] == true ? '' : 'dashed_true'"
           ></div>
         </div>
-        <div
-          class="flex-row jbxx"
-          :class="arr[4] == 'false' ? '' : 'jbxx_true'"
-        >
+        <div class="flex-row jbxx" :class="arr[4] == true ? '' : 'jbxx_true'">
           <div class="flex-col flex_1">
             <span class="block2_right_w1">家庭成员</span>
             <span class="block2_right_w2">Member of family</span>
           </div>
           <button
             class="block2_right_btn"
-            :class="this.arr[4] == 'false' ? '' : 'btywc'"
+            :class="this.arr[4] == true ? '' : 'btywc'"
             @click="goSelectFamilyNum()"
           >
-            {{ this.arr[4] == "false" ? "填写" : "已完成" }}
+            {{ this.arr[4] == true ? "填写" : "已完成" }}
           </button>
         </div>
         <div class="dashed-box">
           <div
             class="dashed"
-            :class="arr[4] == 'false' ? '' : 'dashed_true'"
+            :class="arr[4] == true ? '' : 'dashed_true'"
           ></div>
         </div>
-        <div
-          class="flex-row jbxx"
-          :class="arr[5] == 'false' ? '' : 'jbxx_true'"
-        >
+        <div class="flex-row jbxx" :class="arr[5] == true ? '' : 'jbxx_true'">
           <div class="flex-col flex_1">
             <span class="block2_right_w1">贫困生</span>
             <span class="block2_right_w2">Poor students</span>
           </div>
           <button
             class="block2_right_btn"
-            :class="this.arr[5] == 'false' ? '' : 'btywc'"
+            :class="this.arr[5] == true ? '' : 'btywc'"
             @click="goSelectNeedyStudents()"
           >
-            {{ this.arr[5] == "false" ? "填写" : "已完成" }}
+            {{ this.arr[5] == true ? "填写" : "已完成" }}
           </button>
         </div>
       </div>
@@ -172,12 +154,12 @@ export default {
         college: "信息媒体学院  ",
       },
       arr: {
-        0: "false",
-        1: "false",
-        2: "false",
-        3: "false",
-        4: "false",
-        5: "false",
+        0: true,
+        1: true,
+        2: true,
+        3: true,
+        4: true,
+        5: true,
       },
     };
   },
@@ -186,22 +168,13 @@ export default {
   },
 
   beforeMount() {
-    if (JSON.parse(sessionStorage.getItem("BasicInformation")) == null) {
-      console.log(11111);
-      sessionStorage.setItem("BasicInformation", false);
-      sessionStorage.setItem("PersonalContactInformation", false);
-      sessionStorage.setItem("CurriculumVitae", false);
-      sessionStorage.setItem("BasicFamilyInformation", false);
-      sessionStorage.setItem("FamilyMembers", false);
-      sessionStorage.setItem("NeedyStudents", false);
-    }
+    if (JSON.parse(sessionStorage.getItem("data")) == null) {
+      sessionStorage.setItem("data", JSON.stringify(this.arr));
 
-    this.arr[0] = sessionStorage.getItem("BasicInformation");
-    this.arr[1] = sessionStorage.getItem("PersonalContactInformation");
-    this.arr[2] = sessionStorage.getItem("CurriculumVitae");
-    this.arr[3] = sessionStorage.getItem("BasicFamilyInformation");
-    this.arr[4] = sessionStorage.getItem("FamilyMembers");
-    this.arr[5] = sessionStorage.getItem("NeedyStudents");
+      console.log(this.arr);
+    }
+    this.arr = JSON.parse(sessionStorage.getItem("data"));
+    console.log(this.arr);
   },
   mounted() {},
   methods: {

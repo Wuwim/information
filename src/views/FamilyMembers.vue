@@ -570,7 +570,11 @@ export default {
       }
     },
     submit() {
-      sessionStorage.setItem("FamilyMembers", true);
+      let data = JSON.parse(sessionStorage.getItem("data"));
+      console.log(data)
+      data.[4]=false;
+      console.log(data)
+      sessionStorage.setItem("data", JSON.stringify(data));
       this.$router.push({
         path: "/submitSuccess",
       });

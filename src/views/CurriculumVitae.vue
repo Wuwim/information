@@ -371,21 +371,15 @@ export default {
     },
 
     onSubmit(values) {
-      sessionStorage.setItem("CurriculumVitae", true);
+      let data = JSON.parse(sessionStorage.getItem("data"));
+      console.log(data);
+      data[2] = false;
+      console.log(data);
+      sessionStorage.setItem("data", JSON.stringify(data));
       this.$router.push({
         path: "/submitSuccess",
       });
       console.log(values);
-      //   console.log(values.健康状况);
-      // for (var i in values) {
-      //   console.log(values[i]);
-      //   if (values[i] == "") {
-      //     //   console.log("曾用名为空");
-      //     // Toast("表单未填写完整");
-      //     break;
-      //   }
-      // }
-      //   console.log("submit", values);
     },
   },
 };
